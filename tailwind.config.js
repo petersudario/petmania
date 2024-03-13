@@ -24,7 +24,8 @@ export default {
             'paleta-10': '#f2eaa1',
             'escuro': '#1E2E33',
             'custom-dark-grey': '#4b4f54',
-            'white': '#ffffff'
+            'white': '#ffffff',
+            'black': '#000000',
         },
         extend: {
             backgroundImage: theme => ({
