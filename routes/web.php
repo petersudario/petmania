@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\PetOwnerController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,6 +23,8 @@ Route::get("/contacts", [ContactsController::class, 'index'])->name('contacts');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('petowner', PetOwnerController::class);
 
 
 Route::middleware('auth')->group(function () {
