@@ -5,7 +5,7 @@ import Fundo1 from '../../../public/images/fundo1.jpg';
 import React from "react";
 import '../../css/app.css';
 
-export default function Welcome({auth, laravelVersion, phpVersion}) {
+export default function HomePage({auth, laravelVersion, phpVersion}) {
     return (<>
         <Head title="homepage"/>
         <Navbar/>
