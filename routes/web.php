@@ -2,7 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactsController;
+<<<<<<< HEAD
 use App\Http\Controllers\PetOwnerController;
+=======
+<<<<<<< Updated upstream
+=======
+use App\Http\Controllers\PetOwnerController;
+use App\Http\Controllers\HomepageController;
+>>>>>>> Stashed changes
+>>>>>>> e399b02 (rota da homepage)
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,6 +28,8 @@ use Inertia\Inertia;
 
 
 Route::get("/contacts", [ContactsController::class, 'index'])->name('contacts');
+
+Route::get("/", [HomepageController::class, 'index'])->name('homepage');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
