@@ -13,8 +13,8 @@ export default {
     theme: {
         colors: {
             'paleta-1' : '#381893',
-            'paleta-2': '#2c0153', 
-            'paleta-3': '#060956', 
+            'paleta-2': '#2c0153',
+            'paleta-3': '#060956',
             'paleta-4': '#182a52',
             'paleta-5': '#012f51',
             'paleta-6': '#00523c',
@@ -25,8 +25,12 @@ export default {
             'escuro': '#1E2E33',
             'custom-dark-grey': '#4b4f54',
             'white': '#ffffff'
-        },    
+        },
         extend: {
+            backgroundImage: theme => ({
+               'fundo': 'url("/images/fundo1.jpg")',
+            }),
+
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
