@@ -42,8 +42,8 @@
     height: 100%;
     max-width: 100%;
     max-height: 100vh;
-    object-fit: cover; /* Para garantir que a imagem cubra completamente a área */
-    object-position: center; /* Para centralizar a imagem */
+    object-fit: cover;
+    object-position: center;
 }
 
 .content {
