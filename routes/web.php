@@ -5,12 +5,8 @@ use App\Http\Controllers\PetController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\PetOwnerController;
 use App\Http\Controllers\HomepageController;
-<<<<<<< HEAD
-
-=======
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ServicesController;
->>>>>>> ed8bf7a (Adição das rotas Agenda Pet Contact e Services)
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

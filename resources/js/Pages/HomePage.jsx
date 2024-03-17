@@ -42,6 +42,7 @@ export default function HomePage({auth, laravelVersion, phpVersion}) {
         </div>
 
         <div class="w-[100%] max-h-[100%] h-[100vh] flex bg-paleta-2 justify-center flex-col text-white md:items-center text-6xl" id="servicos">
+            <img src="{logo}" alt="" />
             
             <h2 class="text-6x1">Nosso diferencial:</h2>
             <br />
