@@ -70,7 +70,6 @@ export default function HomePage({auth, laravelVersion, phpVersion}) {
                     </div>
                 </div>
             </div>
-
             <div class="w-[100%] h-[200px] bg-gradient-to-b from-paleta-5 to-paleta-2">
             </div>
 
@@ -84,7 +83,6 @@ export default function HomePage({auth, laravelVersion, phpVersion}) {
                 <h1 class="text-4xl sm:text-4xl md:text-5x1">
                     Quer saber mais?<a href='#'  class="text-4xl sm:text-4xl md:text-5x1 ">    clique aqui</a>
                 </h1>
-
             </div>
             <Footer/>
         </>
