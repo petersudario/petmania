@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { Component, useEffect } from 'react';
 import Checkbox from '@/Components/Checkbox';
+import PetmaniaLogin from '../../../../public/images/petmanialogin.png';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
@@ -8,90 +9,66 @@ import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
-        remember: false,
-    });
+  const { data, setData, post, processing, errors, reset } = useForm({
+    email: '',
+    password: '',
+    remember: false,
+  });
 
-    useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
-
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('login'));
+  useEffect(() => {
+    return () => {
+      reset('password');
     };
+  }, []);
 
-    return (
-        <GuestLayout>
-            <Head title="Log in" />
+  const submit = (e) => {
+    e.preventDefault();
+    post(route('login'));
+  };
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+  return (
+    <div className="w-full h-screen flex items-start">
+      <div className="relative w-1/2 h-full flex flex-col">
+        <div className='absolute top-[25%] left-[10%] flex flex-col'>
+          <h1 className='font-sans text-3xl text-white font-extrabold my-4'>Seja bem vindo ao Petmania!</h1>
+          <p className='font-sans text-2xl italic text-white font-normal drop-shadow-2xl'>Nossa preocupação será em primeiro lugar o seu pet</p>
+        </div>
+        <img src={PetmaniaLogin} alt='imagem-petmania' className='w-full h-full object-cover'/>
+      </div>
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
+      <div className='w-1/2 h-full bg-[#f5f5f5] flex flex-col p-20 justify-between'>
+        <h1 className='text-base mb-2.5 text-[#060606] font-semibold'>Petmania | Petshop</h1>
 
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
-                    />
+        <div className='w-full flex flex-col max-w-[550px]'>
+          <div className='w-full flex flex-col mb-10'>
+            <h3 className='text-3x1 font-semibold mb-4'>Login</h3>
+            <p className='text-sm mb-2'>Bem-vindo de volta! Por favor, entre com suas informações</p>
+          </div>
 
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
+          <div className='w-full flex flex-col'>
+            <InputLabel htmlFor="email">Email:</InputLabel>
+            <TextInput id="email" type="email" placeholder='Email' className='w-full text-black py-4 my-2 bg-transparent outline-none focus:outline-none'/>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+            <InputLabel htmlFor="password">Senha:</InputLabel>
+            <TextInput id="password" type="password" placeholder='Senha' className='w-full text-black py-4 my-2 bg-transparent outline-none focus:outline-none'/>
+          </div>
 
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                    />
+          <div className='w-full flex items-center justify-between'>
+            <Checkbox label="Remember me password" name="remember"/>
+            
+            <Link href={route('password.request')} className='text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2'>
+              Esqueci a senha
+            </Link>
+          </div>
 
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
-                        />
-                        <span className="ms-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
-    );
+          <form onSubmit={submit}>
+            <div className='w-full flex flex-col my-4'>
+              <PrimaryButton className='w-full my-2 text-white'>Log in</PrimaryButton>
+              <PrimaryButton className='w-full my-2 bg-white ' variant="secondary">Cadastrar</PrimaryButton>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
