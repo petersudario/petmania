@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import Fundo1 from '../../../public/images/fundo1.jpg';
 import '../../css/app.css';
 
-export default function HomePage({auth, laravelVersion, phpVersion}) {
+export default function Homepage({auth, laravelVersion, phpVersion}) {
 
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
