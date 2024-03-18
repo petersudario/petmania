@@ -12,13 +12,24 @@ export default function HomePage({auth, laravelVersion, phpVersion}) {
     const slides = [
         {
             title: 'Banho',
-            description: 'Um banho com produtos de qualidade para o seu pet'
+            description: 'Um banho com produtos de qualidade para o seu pet, com a secagem e uma escovação que vai deixá-lo lindo.'
         },
         {
             title: 'Tosa',
-            description: 'Um serviço de tosa para seu pet, nela é possível aparar os pelos do seu pet'
-        }
-        // Adicione mais slides aqui, se desejar
+            description: 'Nossa tosa proporciona cuidados especializados para garantir que a pelagem do seu pet seja tratada com carinho, resultando em uma aparência saudável e brilhante.'
+        },
+        {
+            title: 'Banho e Tosa',
+            description: 'Inclui banho com produtos específicos para animais de estimação, secagem e escovação, além de tosa conforme necessário para manter a pelagem do animal.'
+        },
+        {
+          title: 'Hidratação',
+          description: 'Tratamentos especiais para hidratar e nutrir a pelagem do animal, promovendo uma aparência saudável e brilhante.'
+        },
+        {
+          title: 'Tosa Específica',
+          description: 'Serviços especializados de estética para determinadas raças de animais, como cortes de pelo específicos para Poodles, Schnauzers, entre outros.'
+        },
     ];
 
     const goToPrevSlide = () => {
@@ -48,8 +59,8 @@ export default function HomePage({auth, laravelVersion, phpVersion}) {
                     <h2 className="text-4xl md:text-5xl">Conheça nossos serviços:</h2>
                     <div className="w-[300px] h-[300px] bg-white mt-[20px] rounded-[30px] justify-center flex flex-col items-center">
                         <div className="p-4 justify-center flex flex-col items-center">
-                            <h3 class="text-paleta-2 text-5xl mb-[20px]">{slides[currentSlide].title}</h3>
-                            <p class="text-black text-lg items-center">{slides[currentSlide].description}</p>
+                            <h3 class="text-paleta-2 text-4xl mb-[20px]">{slides[currentSlide].title}</h3>
+                            <p class="text-black text-lg items-center text-justify px-5">{slides[currentSlide].description}</p>
                         </div>
 
                     </div>
