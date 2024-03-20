@@ -23,7 +23,7 @@ class PetController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('CRUD/Pet/Create');
     }
 
     /**

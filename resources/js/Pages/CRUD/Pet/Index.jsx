@@ -4,7 +4,7 @@ import axios from 'axios';
 function Index() {
     return (
         <div>
-            <p>Pet</p>
+            <p class="text-[100px]">Pet</p>
         </div>
     );
 }

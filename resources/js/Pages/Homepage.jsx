@@ -4,7 +4,6 @@ import Footer from './Footer.jsx';
 import Logo from '../../../public/images/logo.png';
 import React, { useState } from 'react';
 import Fundo1 from '../../../public/images/fundo1.jpg';
-import '../../css/app.css';
 
 export default function Homepage({auth, laravelVersion, phpVersion}) {
 
