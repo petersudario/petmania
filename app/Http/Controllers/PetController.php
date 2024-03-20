@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pet;
 use Illuminate\Http\Request;
 
 use Inertia\Inertia;
@@ -11,9 +12,10 @@ class PetController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        return Inertia::render('CRUD/Pet/Index');
+        return Inertia::render('CRUD/Pet/Index', ['pets' => Pet::all()]);
     }
 
     /**
@@ -37,7 +39,7 @@ class PetController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Inertia::render('CRUD/Pet/Show', ['pet' => Pet::find($id)]);
     }
 
     /**
@@ -45,7 +47,7 @@ class PetController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return Inertia::render('CRUD/Pet/Edit', ['pet' => Pet::find($id)]);
     }
 
     /**
@@ -63,4 +65,7 @@ class PetController extends Controller
     {
         //
     }
+
+
+    
 }

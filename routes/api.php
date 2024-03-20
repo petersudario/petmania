@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PetOwnerApi;
+use App\Http\Controllers\PetAPI;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,3 @@ use App\Http\Controllers\PetOwnerApi;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::apiResource('pet_api', PetOwnerApi::class);
