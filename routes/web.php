@@ -10,6 +10,7 @@ use App\Http\Controllers\ServicesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PetAPI;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,6 @@ Route::get('/dashboard', function () {
 
 
 Route::resource('petowner', PetOwnerController::class);
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
