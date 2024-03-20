@@ -30,7 +30,7 @@ Route::get("/contacts", [ContactsController::class, 'index'])->name('contacts');
 Route::get("/", [HomepageController::class, 'index'])->name('homepage');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['admin', 'verified'])->name('dashboard');
 
 
 Route::resource('petowner', PetOwnerController::class);
