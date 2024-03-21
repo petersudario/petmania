@@ -1,13 +1,11 @@
 import { Component, useEffect } from 'react';
 import Checkbox from '@/Components/Checkbox';
 import PetmaniaLogin from '../../../../public/images/petmanialogin.png';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
-import NavLink from '@/Components/NavLink';
+import { Link, useForm } from '@inertiajs/react';
+import InputError from '@/Components/InputError';
 
 export default function Login({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -47,11 +45,50 @@ export default function Login({ status, canResetPassword }) {
           </div>
 
           <div className='w-full flex flex-col'>
-            <InputLabel htmlFor="email">Email:</InputLabel>
-            <TextInput id="email" type="email" placeholder='Email' className='w-full text-black py-4 my-2 bg-transparent outline-none focus:outline-none'/>
+            <InputLabel htmlFor="email" value="Email" />
 
-            <InputLabel htmlFor="password">Senha:</InputLabel>
-            <TextInput id="password" type="password" placeholder='Senha' className='w-full text-black py-4 my-2 bg-transparent outline-none focus:outline-none'/>
+            <TextInput
+                id="email"
+                type="email"
+                name="email"
+                value={data.email}
+                className="mt-1 block w-full"
+                autoComplete="username"
+                onChange={(e) => setData('email', e.target.value)}
+                required
+            />
+
+            <InputError message={errors.email} className="mt-2" />
+
+            <InputLabel htmlFor="password" value="Password" />
+
+            <TextInput
+                id="password"
+                type="password"
+                name="password"
+                value={data.password}
+                className="mt-1 block w-full"
+                autoComplete="new-password"
+                onChange={(e) => setData('password', e.target.value)}
+                required
+            />
+
+                    <InputError message={errors.password} className="mt-2" />
+
+                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+
+                    <TextInput
+                        id="password_confirmation"
+                        type="password"
+                        name="password_confirmation"
+                        value={data.password_confirmation}
+                        className="mt-1 block w-full"
+                        autoComplete="new-password"
+                        onChange={(e) => setData('password_confirmation', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.password_confirmation} className="mt-2" />
           </div>
 
           <div className='w-full flex items-center justify-between'>
@@ -64,8 +101,7 @@ export default function Login({ status, canResetPassword }) {
 
           <form onSubmit={submit}>
             <div className='w-full flex flex-col my-4'>
-              <PrimaryButton className='w-full my-2 text-white'>Log in</PrimaryButton>
-              <PrimaryButton className='w-full my-2 bg-white ' variant="secondary" href={route('register')} >Cadastrar</PrimaryButton>
+              <PrimaryButton className='w-full my-2 text-white' disabled={processing}>Log in</PrimaryButton>
             </div>
           </form>
         </div>
