@@ -15,7 +15,7 @@ import TextInput from '@/Components/TextInput';
 import SelectInput from '@/Components/SelectInput';
 import InputError from '@/Components/InputError';
 
-function Index() {
+function Index({ auth }) {
     const [formData, setFormData, selectedDate, setSelectedDate, selectedOption, setSelectedOption] = useState({
         nome: '',
         cpf: '',
@@ -58,7 +58,7 @@ function Index() {
     return (
        <>
         <div>
-            <Navbar/>
+        <Navbar auth={auth}/>
 
             <div className=' fundo-div min-h-screen py-20'>
 
