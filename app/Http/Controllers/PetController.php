@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pet;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 use Inertia\Inertia;
 
 class PetController extends Controller
@@ -15,7 +18,7 @@ class PetController extends Controller
 
     public function index()
     {
-        return Inertia::render('CRUD/Pet/Index', ['pets' => Pet::all()]);
+        return Inertia::render('CRUD/Pet/Index', ['pet' => Pet::all()]);
     }
 
     /**
@@ -23,16 +26,25 @@ class PetController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('CRUD/Pet/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        echo $request;
+        DB::table('pet')->insert([
+            'pet_name' => $request->nomepet,
+            'specie' => $request->especiepet,
+            'remark' => $request->remark,
+            'fk_pet_owner_id' => 2,
+        ]);
+
+    
     }
+
 
     /**
      * Display the specified resource.
