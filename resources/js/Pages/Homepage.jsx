@@ -1,4 +1,4 @@
-import {Link, Head} from '@inertiajs/react';
+import { Link, Head } from '@inertiajs/react';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
 import Logo from '../../../public/images/logo.png';
@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import Fundo1 from '../../../public/images/fundo1.jpg';
 import '../../css/app.css';
 
-export default function Homepage({auth, laravelVersion, phpVersion}) {
+export default function Homepage({ auth, laravelVersion, phpVersion }) {
 
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
@@ -23,12 +23,12 @@ export default function Homepage({auth, laravelVersion, phpVersion}) {
             description: 'Inclui banho com produtos específicos para animais de estimação, secagem e escovação, além de tosa conforme necessário para manter a pelagem do animal.'
         },
         {
-          title: 'Hidratação',
-          description: 'Tratamentos especiais para hidratar e nutrir a pelagem do animal, promovendo uma aparência saudável e brilhante.'
+            title: 'Hidratação',
+            description: 'Tratamentos especiais para hidratar e nutrir a pelagem do animal, promovendo uma aparência saudável e brilhante.'
         },
         {
-          title: 'Tosa Específica',
-          description: 'Serviços especializados de estética para determinadas raças de animais, como cortes de pelo específicos para Poodles, Schnauzers, entre outros.'
+            title: 'Tosa Específica',
+            description: 'Serviços especializados de estética para determinadas raças de animais, como cortes de pelo específicos para Poodles, Schnauzers, entre outros.'
         },
     ];
 
@@ -41,50 +41,50 @@ export default function Homepage({auth, laravelVersion, phpVersion}) {
     };
 
     return (<>
-            <Head title="homepage"/>
-            <Navbar/>
-            <div class="relative w-100% max-w-[100%] h-100vh text-white md:text-lg bg-black">
-                <div class="absolute z-20 w-[765px] md:w-[100%] items-center">
-                    <img class="opacity-50 w-[100%] h-[100vh] max-h-[100%]" src={Fundo1}/>
-                </div>
-                <div className="relative z-50 text-white h-[100vh] w-auto flex flex-col justify-center items-center ">
-                    <h2 class="text-4xl sm:text-5xl md:text-4x1 lg:text-[90px] font-bold">Conheça a nossa loja!</h2>
-                    <br/><br/><br/><br/><br/><br/><br/><br/>
-                    <a href="#servicos" class="transition ease-out duration-500 underline">Ver nossos servicos</a>
-                </div>
+        <Head title="homepage" />
+        <Navbar auth={auth} />
+        <div className="relative w-100% max-w-[100%] h-100vh text-white md:text-lg bg-black">
+            <div className="absolute z-20 w-[765px] md:w-[100%] items-center">
+                <img className="opacity-50 w-[100%] h-[100vh] max-h-[100%]" src={Fundo1} />
             </div>
-            <div class="relative w-[100%] max-h-[100%] h-[100vh] flex bg-paleta-5 md:justify-arround justify-center flex-row text-white md:items-center" id="servicos">
-                <img src={Logo} class="w-[10%] md:w-[20%] hidden md:block mr-[50px] lg:mr-[100px]" />
-                <div className="items-center justify-center flex flex-col">
-                    <h2 className="text-4xl md:text-5xl">Conheça nossos serviços:</h2>
-                    <div className="w-[300px] h-[300px] bg-white mt-[20px] rounded-[30px] justify-center flex flex-col items-center">
-                        <div className="p-4 justify-center flex flex-col items-center">
-                            <h3 class="text-paleta-2 text-4xl mb-[20px]">{slides[currentSlide].title}</h3>
-                            <p class="text-black text-lg items-center text-justify px-5">{slides[currentSlide].description}</p>
-                        </div>
-
+            <div className="relative z-30 text-white h-[100vh] w-auto flex flex-col justify-center items-center ">
+                <h2 className="text-4xl sm:text-5xl md:text-4x1 lg:text-[90px] font-bold">Conheça a nossa loja!</h2>
+                <br /><br /><br /><br /><br /><br /><br /><br />
+                <a href="#servicos" className="transition ease-out duration-500 underline">Ver nossos servicos</a>
+            </div>
+        </div>
+        <div className="relative w-[100%] max-h-[100%] h-[100vh] flex bg-paleta-5 md:justify-arround justify-center flex-row text-white md:items-center" id="servicos">
+            <img src={Logo} className="w-[10%] md:w-[20%] hidden md:block mr-[50px] lg:mr-[100px]" />
+            <div className="items-center justify-center flex flex-col">
+                <h2 className="text-4xl md:text-5xl">Conheça nossos serviços:</h2>
+                <div className="w-[300px] h-[300px] bg-white mt-[20px] rounded-[30px] justify-center flex flex-col items-center">
+                    <div className="p-4 justify-center flex flex-col items-center">
+                        <h3 className="text-paleta-2 text-4xl mb-[20px]">{slides[currentSlide].title}</h3>
+                        <p className="text-black text-lg items-center text-justify px-5">{slides[currentSlide].description}</p>
                     </div>
-                    <div className="flex justify-center  w-full mt-4">
-                        <button onClick={goToPrevSlide} class="mx-10 text-xl">Anterior</button>
-                        <button onClick={goToNextSlide} class="mx-10 text-xl">Próximo</button>
-                    </div>
+
+                </div>
+                <div className="flex justify-center  w-full mt-4">
+                    <button onClick={goToPrevSlide} className="mx-10 text-xl">Anterior</button>
+                    <button onClick={goToNextSlide} className="mx-10 text-xl">Próximo</button>
                 </div>
             </div>
-            <div class="w-[100%] h-[200px] bg-gradient-to-b from-paleta-5 to-paleta-2">
-            </div>
+        </div>
+        <div className="w-[100%] h-[200px] bg-gradient-to-b from-paleta-5 to-paleta-2">
+        </div>
 
-            <div class="w-[100%] max-h-[100%] h-[100vh] flex bg-paleta-2 justify-center flex-col text-white items-center text-6xl" id="servicos">
+        <div className="w-[100%] max-h-[100%] h-[100vh] flex bg-paleta-2 justify-center flex-col text-white items-center text-6xl" id="servicos">
 
-                <h2 class="text-4xl sm:text-5xl md:text-3x1 lg:text-4x1">Nosso diferencial:</h2>
-                <br />
+            <h2 className="text-4xl sm:text-5xl md:text-3x1 lg:text-4x1">Nosso diferencial:</h2>
+            <br />
 
-                <p class="text-sm sm:text-base md:text-xl lg:text-2xl px-[70px] text-justify">Agende os Cuidados do Seu Pet com Facilidade! No nosso petshop, oferecemos uma experiência única e conveniente para você e seu animal de estimação. Com a nossa agenda online, você pode agendar serviços com apenas alguns cliques, sem a necessidade de ligações telefônicas ou esperas. Priorizamos a praticidade para que você possa desfrutar de mais tempo ao lado do seu companheiro peludo, sabendo que os cuidados necessários estão apenas a um clique de distância.</p>
-                <br />
-                <h1 class="text-4xl sm:text-4xl md:text-5x1">
-                    Quer saber mais?<a href='#'  class="text-4xl sm:text-4xl md:text-5x1 ">    clique aqui</a>
-                </h1>
-            </div>
-            <Footer/>
-        </>
+            <p className="text-sm sm:text-base md:text-xl lg:text-2xl px-[70px] text-justify">Agende os cuidados do seu Pet com facilidade! No nosso petshop, oferecemos uma experiência única e conveniente para você e seu animal de estimação. Com a nossa agenda online, você pode agendar serviços com apenas alguns cliques, sem a necessidade de ligações telefônicas ou esperas. Priorizamos a praticidade para que você possa desfrutar de mais tempo ao lado do seu companheiro peludo, sabendo que os cuidados necessários estão apenas a um clique de distância.</p>
+            <br />
+            <h1 className="text-4xl sm:text-4xl md:text-5x1">
+                Quer saber mais?<a href='#' className="text-4xl sm:text-4xl md:text-5x1 ">Clique aqui</a>
+            </h1>
+        </div>
+        <Footer />
+    </>
     );
 }

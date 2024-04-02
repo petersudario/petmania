@@ -8,10 +8,10 @@ import Fundo4 from '../../../../../public/images/img4.jpeg';
 import Fundo5 from '../../../../../public/images/img5.jpeg';
 import axios from 'axios';
 
-function Index() {
+function Index({ auth }) {
     return (
         <div>
-            <Navbar/>
+            <Navbar auth={auth}/>
 
             <h2 className='text-3xl font-bold text-center mt-10 mb-3'>Nossos Serviços!</h2>
 
