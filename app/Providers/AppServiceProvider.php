@@ -25,7 +25,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Validator::replacer('cpf', function ($message, $attribute, $rule, $parameters) {
-            return str_replace(':attribute', $attribute, 'CPF inválido. Use apenas números. Máximo: 11 caracteres.');
+            return str_replace(':attribute', $attribute, 'CPF inválido. Preencha corretamente, sem hífens ou pontos.');
         });
+
+
     }
 }

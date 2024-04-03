@@ -35,16 +35,16 @@ export default function Login({ status, canResetPassword }) {
         <img src={PetmaniaLogin} alt='imagem-petmania' className='absolute w-full h-full object-cover opacity-70 z-10'/>
       </div>
 
-      <div className=' w-[100%] md:w-1/2 bg-[#f5f5f5] flex flex-col p-20'>
+      <div className=' w-[100%] md:w-1/2 bg-[#f5f5f5] flex flex-col p-20 '>
         <h1 className='text-base mb-2.5 text-[#060606] font-semibold'>Petmania | Petshop</h1>
 
-        <div className='w-full flex flex-col max-w-[550px]'>
+        <div className='w-full flex flex-col gap-[12px] max-w-[550px]'>
           <div className='w-full flex flex-col mb-10'>
             <h3 className='text-3x1 font-semibold mb-4'>Login</h3>
             <p className='text-sm mb-2'>Bem-vindo de volta! Por favor, entre com suas informações</p>
           </div>
 
-          <div className='w-full flex flex-col'>
+          <div className='w-full flex flex-col gap-[2px]'>
             <InputLabel htmlFor="email" value="Email" />
 
             <TextInput
@@ -60,7 +60,7 @@ export default function Login({ status, canResetPassword }) {
 
             <InputError message={errors.email} className="mt-2" />
 
-            <InputLabel htmlFor="password" value="Password" />
+            <InputLabel htmlFor="password" value="Senha" />
 
             <TextInput
                 id="password"
@@ -73,30 +73,8 @@ export default function Login({ status, canResetPassword }) {
                 required
             />
 
-                    <InputError message={errors.password} className="mt-2" />
+            <InputError message={errors.password} className="mt-2" />
 
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.password_confirmation} className="mt-2" />
-          </div>
-
-          <div className='w-full flex items-center justify-between'>
-            <Checkbox label="Remember me password" name="remember"/>
-            
-            <Link href={route('password.request')} className='text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2'>
-              Esqueci a senha
-            </Link>
           </div>
 
           <form onSubmit={submit}>
