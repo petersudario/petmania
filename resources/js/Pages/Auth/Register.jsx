@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import CPFInput from '@/Components/CPFInput';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -14,7 +15,7 @@ export default function Register() {
         cpf: '',
         password: '',
         password_confirmation: '',
-    
+
     });
 
     useEffect(() => {
@@ -40,57 +41,35 @@ export default function Register() {
                         <p className='text-sm mb-2'>Cadastre suas informações!</p>
                     </div>
 
-                    <div className='w-full flex flex-col'>
-                        <InputLabel htmlFor="name">Nome:</InputLabel>
-                        <TextInput id="name" type="name" value={data.name} isFocused={true} onChange={(e) => setData('name', e.target.value)} placeholder="Digite seu nome" required className="w-full text-black py-4 my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" />
-                        <InputError message={errors.name} className="mt-2" />
+                    <div className='w-full flex flex-col  gap-[20px]'>
+                        <div className='w-full flex flex-col'>
+                            <InputLabel htmlFor="name">Nome:</InputLabel>
+                            <TextInput id="name" type="name" value={data.name} isFocused={true} onChange={(e) => setData('name', e.target.value)} placeholder="Digite seu nome" required className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" />
+                            <InputError message={errors.name} />
+                        </div>
 
-                        <InputLabel htmlFor="email">Email:</InputLabel>
+                        <div className='w-full flex flex-col'>
+                            <InputLabel htmlFor="email">Email:</InputLabel>
+                            <TextInput id="email" type="email" value={data.email} isFocused={true} onChange={(e) => setData('email', e.target.value)} placeholder='Email' required className='w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12' />
+                            <InputError message={errors.email} />
+                        </div>
 
-                        <TextInput id="email" type="email" value={data.email} isFocused={true} onChange={(e) => setData('email', e.target.value)} placeholder='Email' required className='w-full text-black py-4 my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12' />
-                        <InputError message={errors.email} className="mt-2" />
+                        <div className='w-full flex flex-col'>
+                            <InputLabel htmlFor="cpf" value="CPF" />
+                            <CPFInput id="cpf" type="cpf" name="cpf" value={data.cpf} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" autoComplete="cpf" onChange={(e) => setData('cpf', e.target.value)} required />
+                            <InputError message={errors.cpf} />
+                        </div>
 
-                        <InputLabel htmlFor="cpf" value="CPF" />
-
-                        <TextInput
-                            id="cpf"
-                            type="cpf"
-                            name="cpf"
-                            value={data.cpf}
-                            className="w-full text-black py-4 my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12"
-                            autoComplete="cpf"
-                            onChange={(e) => setData('cpf', e.target.value)}
-                            required
-                        />
-
-                        <InputError message={errors.cpf} className="mt-2" />
-
-                        <InputLabel htmlFor="password" value="Password" />
-
-
-                        <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            value={data.password}
-                            className="w-full text-black py-4 my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12"
-                            autoComplete="new-password"
-                            onChange={(e) => setData('password', e.target.value)}
-                            required
-                        />
-
-                        <InputError message={errors.password} className="mt-2" />
-                        <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-                        <TextInput
-                            id="password_confirmation"
-                            type="password"
-                            name="password_confirmation"
-                            value={data.password_confirmation}
-                            className="w-full text-black py-4 my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12"
-                            autoComplete="new-password"
-                            onChange={(e) => setData('password_confirmation', e.target.value)}
-                            required
-                        />
+                        <div className='w-full flex flex-col'>
+                            <InputLabel htmlFor="password" value="Password" />
+                            <TextInput id="password" type="password" name="password" value={data.password} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" autoComplete="new-password" onChange={(e) => setData('password', e.target.value)} required/>
+                            <InputError message={errors.password} />
+                        </div>
+                        <div className='w-full flex flex-col'>
+                            <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+                            <TextInput id="password_confirmation" type="password" name="password_confirmation" value={data.password_confirmation} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" autoComplete="new-password" onChange={(e) => setData('password_confirmation', e.target.value)} required />
+                        </div>
+                        
                         <form onSubmit={submit}>
                             <PrimaryButton className="text-white" disabled={processing}>
                                 Cadastrar

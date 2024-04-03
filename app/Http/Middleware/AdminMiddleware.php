@@ -25,6 +25,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return redirect('services');
+        return redirect('/');
     }
 }
