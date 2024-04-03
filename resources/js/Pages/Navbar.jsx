@@ -35,6 +35,12 @@ export default function Navbar({ auth }) {
                                 Contato
                             </NavLink>
 
+                            {(auth.user && auth.user.role == "admin" ) && (
+                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    Dashboard
+                                </NavLink>
+                            )}
+
                         </div>
                         {!auth.user && (
 
