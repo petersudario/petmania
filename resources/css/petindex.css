@@ -5,6 +5,7 @@ ul li:nth-child(even) {
 /* Estilo para linhas ímpares */
 ul li:nth-child(odd) {
     background-color: #f3ffff; /* Cor de fundo para linhas ímpares */
+
 }
 
 li {
