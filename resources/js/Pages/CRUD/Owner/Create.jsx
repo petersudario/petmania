@@ -2,25 +2,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/Pages/Navbar";
 import PrimaryButton from "../../../Components/PrimaryButton";
-import FormInput from "../../../Components/FormInput";
+import { Head, Link, useForm } from '@inertiajs/react';
 import Footer from "../../Footer";
 import CPFInput from "../../../Components/CPFInput";
 import TextInput from "@/Components/TextInput";
+import TimestampInput from "@/Components/TimestampInput";
+import PhoneInput from "@/Components/PhoneInput";
 
 function Create({ auth }) {
-    const [petOwner, setPetOwner] = useState([]);
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: "",
+        cpf: "",
+        phone_number: "",
+        address: "",
+        birth_date: "",
 
-    useEffect(() => {
-        // Fetch countries data from API
-        axios
-            .get("/api/pet_api")
-            .then((response) => {
-                setPetOwner(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+    });
 
     return (
         <div>
@@ -38,12 +35,11 @@ function Create({ auth }) {
                         <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
                             <label className="font-bold">Nome</label>
                             <TextInput
-                            placeholder="Nome"
-                            nome="Nome"
-                            type="text"
-                            name="nome"
-                            className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
-                        />
+                                placeholder="Ex: João da Silva"
+                                type="text"
+                                name="name"
+                                className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                            />
                         </div>
                         <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
                             <label className="font-bold">CPF:</label>
@@ -51,7 +47,8 @@ function Create({ auth }) {
                                 id="cpf"
                                 type="cpf"
                                 name="cpf"
-                                value="000.000.000-00"
+                                placeholder="000.000.000-00"
+                                value={data.cpf}
                                 className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
                                 autoComplete="cpf"
                                 onChange={(e) => setData("cpf", e.target.value)}
@@ -59,34 +56,40 @@ function Create({ auth }) {
                             />
                         </div>
                         <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
-                        <label className="font-bold">Número de telefone:</label>
-                        <TextInput
-                            placeholder="Digite aqui seu número"
-                            nome="Telefone"
-                            type="text"
-                            name="telefone"
-                            className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
-                        />
+                            <label className="font-bold">Número de telefone:</label>
+                            <PhoneInput
+                                id="phone_number"
+                                type="tel"
+                                name="phone_number"
+                                value={data.phone_number}
+                                placeholder="(41)99999-9999"
+                                onChange={(e) => setData("phone_number", e.target.value)}
+                                className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                            />
                         </div>
                         <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
                             <label className="font-bold">Endereço:</label>
                             <TextInput
-                                placeholder="Digite seu endereço"
                                 id="Endereco"
                                 type="text"
                                 name="Endereco"
+                                placeholder="Ex: Rua das Flores, 123"
                                 className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
                                 autoComplete="Endereco"
                                 onChange={(e) => setData("Endereco", e.target.value)}
                                 required
                             />
                         </div>
-                        <FormInput
-                            placeholder="Data de nascimento"
-                            nome="Data de nascimento"
-                            type="date"
-                            name="datanascimento"
-                        />
+                        <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
+                            <label className="font-bold">CPF:</label>
+                            <TimestampInput
+                                label="Data de nascimento"
+                                className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                                value={data.birth_date}
+                                onChange={(e) => setData("birth_date", e.target.value)}
+                            />
+                        </div>
+
 
                         <PrimaryButton className="text-white mt-10">
                             Cadastrar

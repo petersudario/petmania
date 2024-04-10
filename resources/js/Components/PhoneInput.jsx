@@ -1,27 +1,26 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, {forwardRef, useEffect, useRef} from "react";
 
-const formatPhoneNumber = (phoneNumber) => {
-  phoneNumber = phoneNumber.replace(/\D/g, ''); // Remove caracteres não numéricos
+function formatarTelefoneCelular(telefone) {
+  // Remove todos os caracteres não numéricos
+  telefone = telefone.replace(/\D/g, '');
 
-  let formattedPhoneNumber = '';
-
-  if (phoneNumber.length > 0 && phoneNumber.charAt(0) !== '0') {
-    phoneNumber = '0' + phoneNumber; // Adiciona o código de país 0 se não estiver presente
+  // Adiciona o código de país '55' se ausente
+  if (telefone.length > 0 && telefone.charAt(0) !== '0') {
+    telefone = '0' + telefone;
   }
 
-  if (phoneNumber.length > 2) {
-    formattedPhoneNumber += `(${phoneNumber.substring(0, 2)}) `;
+  // Formata o número de telefone com parênteses e hífen
+  if (telefone.length > 2) {
+    telefone = `(${telefone.substring(0, 2)})${telefone.substring(2)}`;
   }
-  if (phoneNumber.length > 7) {
-    formattedPhoneNumber += `${phoneNumber.substring(2, 7)}-${phoneNumber.substring(7, 11)}`;
-  } else {
-    formattedPhoneNumber += phoneNumber.substring(2);
+  if (telefone.length > 9) {
+    telefone = `${telefone.substring(0, 9)}-${telefone.substring(9, 13)}`;
   }
 
-  return formattedPhoneNumber;
-};
+  return telefone;
+}
 
-const PhoneInput = forwardRef(({ value, className = '', isFocused = false, ...props }, ref) => {
+const PhoneInput = forwardRef(({value, className = '', isFocused = false, ...props}, ref) => {
   const inputRef = useRef();
 
   useEffect(() => {
@@ -30,13 +29,13 @@ const PhoneInput = forwardRef(({ value, className = '', isFocused = false, ...pr
     }
   }, [isFocused]);
 
-  const format = formatPhoneNumber(value);
+  const formattedPhone = formatarTelefoneCelular(value);
 
   return (
     <input
       {...props}
       type="text"
-      value={format}
+      value={formattedPhone}
       className={'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm' + className}
       ref={ref || inputRef}
     />
