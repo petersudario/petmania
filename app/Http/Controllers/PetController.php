@@ -34,15 +34,15 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {   
-        echo $request;
-        DB::table('pet')->insert([
-            'pet_name' => $request->nomepet,
-            'specie' => $request->especiepet,
-            'remark' => $request->remark,
-            'fk_pet_owner_id' => 2,
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'species' => 'required|string|max:255',
         ]);
 
-    
+        $pet = Pet::create([
+            'pet_name' => $request->name,
+            'species' => $request->species,
+        ]); 
     }
 
 
