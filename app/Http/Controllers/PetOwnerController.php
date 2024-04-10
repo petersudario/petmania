@@ -21,7 +21,7 @@ class PetOwnerController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('CRUD/Owner/Create');
     }
 
     /**
