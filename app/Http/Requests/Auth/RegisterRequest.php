@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string', 'min:8'],
-            'cpf' => 'required|string|max:14|cpf'
+            'cpf' => 'required|string|max:15|min:15'
         ];
     }
 
@@ -41,6 +41,7 @@ class RegisterRequest extends FormRequest
             'cpf.required' => 'O campo cpf é obrigatório.',
             'cpf.max' => 'O campo cpf deve ter no máximo 11 caracteres.',
             'cpf.cpf' => 'O campo cpf deve ser um CPF válido.',
+            'cpf.min' => 'O campo cpf deve ter no mínimo 11 caracteres.',
             'password.min' => 'O campo senha deve ter no mínimo 8 caracteres.'
 
         ];

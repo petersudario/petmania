@@ -10,4 +10,13 @@ class Owner extends Model
     use HasFactory;
     protected $table = "owners";
 
+    protected $fillable = [
+        'name',
+        'email',
+        'cpf',
+        'address',
+        'phone_number',
+        'birth_date',
+    ];
+
 }

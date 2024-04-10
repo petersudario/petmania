@@ -19,30 +19,31 @@ const Dashboard = ({ auth, laravelVersion, phpVersion }) => {
 
                     <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out mb-6">
                         <h2 className="text-xl md:text-2xl font-semibold mb-2 text-black">Clientes</h2>
-                        <p className="text-sm md:text-base text-gray-600">Gerencie os clientes cadastrados.</p>
+                        <p className="text-sm md:text-base text-gray-600">Gerencie os donos de pets cadastrados.</p>
                         <div className="flex flex-col md:flex-row md:justify-between mt-4">
-                            <Link href="#" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center mb-2 md:mb-0">
+                            <Link href={route('petowner.index')} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center mb-2 md:mb-0">
                                 Ver Clientes
                             </Link>
+                            <Link href={route('petowner.create')} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+                                Adicionar Clientes
+                            </Link>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out mb-6">
+                        <h2 className="text-xl md:text-2xl font-semibold mb-2 text-black">Pets</h2>
+                        <p className="text-sm md:text-base text-gray-600">Gerencie os pets cadastrados.</p>
+                        <div className="flex flex-col md:flex-row md:justify-between mt-4">
+                            <Link href="#" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center mb-2 md:mb-0">
+                                Ver Pets
+                            </Link>
                             <Link href="#" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
-                                Adicionar Cliente
+                                Adicionar Pet
                             </Link>
                         </div>
                     </div>
 
                     {/* Card 2 - Donos de Pets */}
-                    <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out mb-6">
-                        <h2 className="text-xl md:text-2xl font-semibold mb-2 text-black">Donos de Pets</h2>
-                        <p className="text-sm md:text-base text-gray-600">Gerencie os donos de pets cadastrados.</p>
-                        <div className="flex flex-col md:flex-row md:justify-between mt-4">
-                            <Link href="#" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center mb-2 md:mb-0">
-                                Ver Donos de Pets
-                            </Link>
-                            <Link href="#" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
-                                Adicionar Dono de Pet
-                            </Link>
-                        </div>
-                    </div>
 
                     {/* Card 3 - Agendamentos */}
                     <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out mb-6">

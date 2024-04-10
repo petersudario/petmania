@@ -35,6 +35,12 @@ export default function Navbar({ auth }) {
                                 Contato
                             </NavLink>
 
+                            {(auth.user && auth.user.role == "admin" ) && (
+                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    Dashboard
+                                </NavLink>
+                            )}
+
                         </div>
                         {!auth.user && (
 
@@ -121,13 +127,13 @@ export default function Navbar({ auth }) {
                         Home
                     </ResponsiveNavLink>
 
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('')}>
+                    <ResponsiveNavLink href={route('about')} active={route().current('about')}>
                         Sobre
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('')}>
+                    <ResponsiveNavLink href={route('agenda.index')} active={route().current('agenda.index')}>
                         Agenda
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('')}>
+                    <ResponsiveNavLink href={route('contacts')} active={route().current('contacts')}>
                         Contato
                     </ResponsiveNavLink>
                 </div>

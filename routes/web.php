@@ -27,14 +27,22 @@ Route::resource("agenda", AgendaController::class);
 Route::resource("pet", PetController::class);
 Route::get("/services", [ServicesController::class, 'index'])->name('services');
 Route::get("/contacts", [ContactsController::class, 'index'])->name('contacts');
+Route::get("/sobre", function () {
+    return Inertia::render('Dashboard');
+})->name('about');
 
 Route::get("/", [HomepageController::class, 'index'])->name('homepage');
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['admin', 'verified'])->name('dashboard');
 
 
-Route::resource('petowner', PetOwnerController::class);
+Route::middleware('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::resource('petowner', PetOwnerController::class);
+
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,4 +50,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
