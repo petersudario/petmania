@@ -44,7 +44,6 @@ export default function CreatePet({ auth }) {
       remark: e.target.value,
     }));
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
