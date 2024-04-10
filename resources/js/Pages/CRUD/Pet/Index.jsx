@@ -18,12 +18,8 @@ import '../../../../css/petindex.css';
 function Index() {
     return (
         <>
-
+            <Navbar auth={auth} />
             <div className="h-[100vh]">
-                <div className=" w-[100vw] bg-paleta-5 h-[50px] text-white flex items-center justify-center">
-                    <h1>Header não funfando</h1>
-                </div>
-
                 <div className="flex flex-col items-center items-center">
                     <h1 className="mt-20 mb-20 font-extrabold text-[30px]">Bem vindo à tela de modificação dos Pets</h1>
                     <ul>
