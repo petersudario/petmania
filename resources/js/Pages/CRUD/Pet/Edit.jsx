@@ -13,7 +13,6 @@ import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import React, {useState} from "react";
 import Footer from "../../Footer.jsx";
 
-
 export default function EditPet({pet}) {
     const [nomePet, setNomePet] = useState("Luly");
     const [racapet, setracaPet] = useState("Yorkshire");
@@ -68,8 +67,8 @@ export default function EditPet({pet}) {
                                   type="radio"
                                   name="escolha"
                                   value="sim"
-                                  checked={escolha === "sim"} // Verifica se a escolha é "sim"
-                                  onChange={Mudavacina} // Define a função para lidar com a mudança na escolha do usuário
+                                  checked={escolha === "sim"}
+                                  onChange={Mudavacina}
                               />
                               Sim
                           </label>
@@ -80,8 +79,8 @@ export default function EditPet({pet}) {
                                   type="radio"
                                   name="escolha"
                                   value="nao"
-                                  checked={escolha === "nao"} // Verifica se a escolha é "nao"
-                                  onChange={Mudavacina} // Define a função para lidar com a mudança na escolha do usuário
+                                  checked={escolha === "nao"}
+                                  onChange={Mudavacina}
                               />
                               Não
                           </label>
