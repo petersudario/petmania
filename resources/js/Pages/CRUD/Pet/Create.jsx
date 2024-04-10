@@ -63,6 +63,7 @@ export default function CreatePet({ auth }) {
 
   return (
       <>
+          <Navbar auth={auth} />
           <div>
               <div className=' fundo-div min-h-screen py-20'>
 
