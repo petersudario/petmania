@@ -5,6 +5,7 @@ import PrimaryButton from "../../../Components/PrimaryButton";
 import FormInput from "../../../Components/FormInput";
 import Footer from "../../Footer";
 import CPFInput from "../../../Components/CPFInput";
+import TextInput from "@/Components/TextInput";
 
 function Create({ auth }) {
     const [petOwner, setPetOwner] = useState([]);
@@ -34,12 +35,16 @@ function Create({ auth }) {
                     </div>
 
                     <form className="mb-[5vh] flex flex-col items-center w-[70%] bg-[#D6D6D6] rounded-[50px] pb-10">
-                        <FormInput
+                        <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
+                            <label className="font-bold">Nome</label>
+                            <TextInput
                             placeholder="Nome"
                             nome="Nome"
                             type="text"
                             name="nome"
+                            className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
                         />
+                        </div>
                         <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
                             <label className="font-bold">CPF:</label>
                             <CPFInput
@@ -53,18 +58,29 @@ function Create({ auth }) {
                                 required
                             />
                         </div>
-                        <FormInput
-                            placeholder="Número de telefone"
+                        <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
+                        <label className="font-bold">Número de telefone:</label>
+                        <TextInput
+                            placeholder="Digite aqui seu número"
                             nome="Telefone"
                             type="text"
                             name="telefone"
+                            className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
                         />
-                        <FormInput
-                            placeholder="Endereço"
-                            nome="Endereço"
-                            type="text"
-                            name="endereco"
-                        />
+                        </div>
+                        <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
+                            <label className="font-bold">Endereço:</label>
+                            <TextInput
+                                placeholder="Digite seu endereço"
+                                id="Endereco"
+                                type="text"
+                                name="Endereco"
+                                className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                                autoComplete="Endereco"
+                                onChange={(e) => setData("Endereco", e.target.value)}
+                                required
+                            />
+                        </div>
                         <FormInput
                             placeholder="Data de nascimento"
                             nome="Data de nascimento"
