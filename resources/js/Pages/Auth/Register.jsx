@@ -56,7 +56,7 @@ export default function Register() {
 
                         <div className='w-full flex flex-col'>
                             <InputLabel htmlFor="cpf" value="CPF" />
-                            <CPFInput id="cpf" type="cpf" name="cpf" value={data.cpf} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" autoComplete="cpf" onChange={(e) => setData('cpf', e.target.value)} required />
+                            <CPFInput id={"cpf"} name={"cpf"} value={data.cpf} onChange={(value) => setData("cpf", value)} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" autoComplete="cpf" required />
                             <InputError message={errors.cpf} />
                         </div>
 

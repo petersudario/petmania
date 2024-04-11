@@ -33,7 +33,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'cpf' => 'required|string|min:15|max:15|unique:'.User::class,
+            'cpf' => 'required|string|unique:'.User::class,
             'password' => ['required', 'confirmed', 'min:8'],
             
         ], ['email.unique' => 'O email informado já está em uso.', 'cpf.unique' => 'O CPF informado já está em uso.', 'password.confirmed' => 'As senhas não coincidem.']);
