@@ -31,12 +31,28 @@ class PetOwnerController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.Owner::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . Owner::class,
             'phone_number' => 'required|string|max:15',
             'address' => 'required|string|max:255',
             'birth_date' => 'required|date',
-            'cpf' => 'required|string|unique:'.Owner::class,
-        ], ['email.unique' => 'O email informado já está cadastrado.', 'cpf.unique' => 'O CPF informado já está cadastrado.', 'password.confirmed' => 'As senhas não coincidem.']);
+            'cpf' => 'required|string|unique:' . Owner::class,
+        ], [
+            'name.required' => 'O campo nome é obrigatório.',
+            'name.max' => 'O nome informado é muito longo.',
+            'email.unique' => 'O email informado já está em uso.',
+            'email.email' => 'O email informado não é válido.',
+            'email.required' => 'O de campo email é obrigatório.',
+            'email.max' => 'O email informado é muito longo.',
+            'email.lowercase' => 'O email informado deve ser minúsculo.',
+            'phone_number.required' => 'O campo telefone é obrigatório.',
+            'phone_number.max' => 'O telefone informado é muito longo.',
+            'address.required' => 'O campo endereço é obrigatório.',
+            'address.max' => 'O endereço informado é muito longo.',
+            'birth_date.required' => 'O campo data de nascimento é obrigatório.',
+            'birth_date.date' => 'O campo data de nascimento deve ser uma data válida.',
+            'cpf.required' => 'O campo CPF é obrigatório.',
+            'cpf.unique' => 'O CPF informado já está em uso.',
+        ]);
 
         $owner = Owner::create([
             'name' => $request->name,
@@ -52,7 +68,7 @@ class PetOwnerController extends Controller
 
     }
 
-   
+
     public function show(string $id)
     {
         //
