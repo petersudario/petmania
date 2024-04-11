@@ -14,7 +14,7 @@ import React, {useState} from "react";
 import Footer from "../../Footer.jsx";
 
 
-export default function EditPet({pet}) {
+export default function Edit({pet}, {auth}) {
     const [nomePet, setNomePet] = useState("Luly");
     const [racapet, setracaPet] = useState("Yorkshire");
     const [datapet, setdata] = useState("2018-02-14");
@@ -31,15 +31,12 @@ export default function EditPet({pet}) {
         setobs(event.target.value);
     };
     const Mudavacina = (event) => {
-        setEscolha(event.target.value); // Atualiza o estado com a nova escolha do usuário
+        setEscolha(event.target.value);
     };
 
   return (
-      <>
-
-          <div className="h-[50px] bg-paleta-5 text-white flex justify-center items-center">
-              <h1>Navbar não funfando</h1>
-          </div>
+      <> 
+        <Navbar auth={auth}/>   
           <div className="h-[90vh] flex flex-col items-center ">
 
               <h1 className="font-extrabold text-3xl mt-10 mb-10">
@@ -91,7 +88,6 @@ export default function EditPet({pet}) {
                       <button className="bg-paleta-8 text-white w-[150px] h-[50px] text-[25px] rounded-[60px]">Salvar</button>
                   </div>
               </div>
-
           </div>
           <Footer />
       </>

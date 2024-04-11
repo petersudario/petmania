@@ -15,10 +15,10 @@ import Footer from "@/Pages/Footer.jsx";
 import '../../../../css/petindex.css';
 
 
-function Index() {
+function Index({ auth }) {
     return (
-        <>
-            <Navbar auth={auth} />
+        <>          
+            <Navbar auth={auth}/>
             <div className="h-[100vh]">
                 <div className="flex flex-col items-center items-center">
                     <h1 className="mt-20 mb-20 font-extrabold text-[30px]">Bem vindo à tela de modificação dos Pets</h1>
