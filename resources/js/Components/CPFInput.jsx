@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CPFInput = ({ value, onChange }) => {
+const CPFInput = ({ id, name, value, onChange }) => {
   const handleCPFChange = (event) => {
     // Remove caracteres não numéricos do CPF
     const newCPF = event.target.value.replace(/\D/g, '');
@@ -15,8 +15,8 @@ const CPFInput = ({ value, onChange }) => {
     <div>
       <input
         type="text"
-        id="cpf"
-        name="cpf"
+        id={id}
+        name={name}
         value={value}
         onChange={handleCPFChange}
         maxLength={14} // Limita a quantidade de caracteres

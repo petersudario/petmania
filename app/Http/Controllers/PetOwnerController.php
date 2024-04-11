@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Owner;
 use Inertia\Inertia;
@@ -30,12 +31,12 @@ class PetOwnerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:' . Owner::class,
-            'phone_number' => 'required|string|max:15',
+            'name' => 'required|string|min:10|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:' . Owner::class . '|unique:' . User::class,
+            'phone_number' => 'required|string|min:14|max:14',
             'address' => 'required|string|max:255',
             'birth_date' => 'required|date',
-            'cpf' => 'required|string|unique:' . Owner::class,
+            'cpf' => 'required|cpf|string|unique:' . Owner::class,
         ], [
             'name.required' => 'O campo nome é obrigatório.',
             'name.max' => 'O nome informado é muito longo.',
@@ -45,6 +46,7 @@ class PetOwnerController extends Controller
             'email.max' => 'O email informado é muito longo.',
             'email.lowercase' => 'O email informado deve ser minúsculo.',
             'phone_number.required' => 'O campo telefone é obrigatório.',
+            'phone_number.min' => 'O telefone informado é muito curto para um número de telefone.',
             'phone_number.max' => 'O telefone informado é muito longo.',
             'address.required' => 'O campo endereço é obrigatório.',
             'address.max' => 'O endereço informado é muito longo.',

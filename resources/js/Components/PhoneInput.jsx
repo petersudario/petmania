@@ -1,4 +1,4 @@
-const PhoneInput = ({ value, onChange }) => {
+const PhoneInput = ({ id, name, value, onChange }) => {
   const handlePhoneChange = (event) => {
     // Remove caracteres não numéricos do telefone
     const newPhone = event.target.value.replace(/\D/g, '');
@@ -13,8 +13,8 @@ const PhoneInput = ({ value, onChange }) => {
     <div>
       <input
         type="text"
-        id="phone_number"
-        name="phone_number"
+        id={id}
+        name={name}
         value={value}
         onChange={handlePhoneChange}
         maxLength={14} // Limita a quantidade de caracteres

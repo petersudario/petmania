@@ -68,13 +68,13 @@ function Create({ auth }) {
                             </div>
                             <div className="flex flex-col w-[60%]">
                                 <InputLabel htmlFor="cpf">CPF:</InputLabel>
-                                <CPFInput value={data.cpf} onChange={(value) => setData("cpf", value)} />
+                                <CPFInput id={"cpf"} name={"cpf"} value={data.cpf} onChange={(value) => setData("cpf", value)} />
                                 <InputError message={errors.cpf} />
 
                             </div>
                             <div className="flex flex-col w-[60%]">
                                 <InputLabel htmlFor="phone_number">Telefone Celular:</InputLabel>
-                                <PhoneInput value={data.phone_number} onChange={(value) => setData("phone_number", value)} />
+                                <PhoneInput id={"phone_number"} name={"phone_number"} value={data.phone_number} onChange={(value) => setData("phone_number", value)} />
                                 <InputError message={errors.phone_number} />
                             </div>
                             <div className="flex flex-col w-[60%]">
