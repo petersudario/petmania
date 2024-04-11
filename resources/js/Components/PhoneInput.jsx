@@ -1,46 +1,27 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+const PhoneInput = ({ id, name, value, onChange }) => {
+  const handlePhoneChange = (event) => {
+    // Remove caracteres não numéricos do telefone
+    const newPhone = event.target.value.replace(/\D/g, '');
 
-const formatPhoneNumber = (phoneNumber) => {
-  phoneNumber = phoneNumber.replace(/\D/g, ''); // Remove caracteres não numéricos
+    // Formata o telefone com parênteses e hífen
+    const formattedPhone = newPhone.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1)$2-$3');
 
-  let formattedPhoneNumber = '';
-
-  if (phoneNumber.length > 0 && phoneNumber.charAt(0) !== '0') {
-    phoneNumber = '0' + phoneNumber; // Adiciona o código de país 0 se não estiver presente
-  }
-
-  if (phoneNumber.length > 2) {
-    formattedPhoneNumber += `(${phoneNumber.substring(0, 2)}) `;
-  }
-  if (phoneNumber.length > 7) {
-    formattedPhoneNumber += `${phoneNumber.substring(2, 7)}-${phoneNumber.substring(7, 11)}`;
-  } else {
-    formattedPhoneNumber += phoneNumber.substring(2);
-  }
-
-  return formattedPhoneNumber;
-};
-
-const PhoneInput = forwardRef(({ value, className = '', isFocused = false, ...props }, ref) => {
-  const inputRef = useRef();
-
-  useEffect(() => {
-    if (isFocused && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isFocused]);
-
-  const format = formatPhoneNumber(value);
+    onChange(formattedPhone);
+  };
 
   return (
-    <input
-      {...props}
-      type="text"
-      value={format}
-      className={'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm' + className}
-      ref={ref || inputRef}
-    />
+    <div>
+      <input
+        type="text"
+        id={id}
+        name={name}
+        value={value}
+        onChange={handlePhoneChange}
+        maxLength={14} // Limita a quantidade de caracteres
+        placeholder="(00) 12345-6789" // Exemplo de formato esperado
+      />
+    </div>
   );
-});
+};
 
 export default PhoneInput;

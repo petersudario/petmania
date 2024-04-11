@@ -2,25 +2,28 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/Pages/Navbar";
 import PrimaryButton from "../../../Components/PrimaryButton";
-import FormInput from "../../../Components/FormInput";
+import { Head, Link, useForm } from '@inertiajs/react';
 import Footer from "../../Footer";
 import CPFInput from "../../../Components/CPFInput";
 import TextInput from "@/Components/TextInput";
+import TimestampInput from "@/Components/TimestampInput";
+import PhoneInput from "@/Components/PhoneInput";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
 
 function Create({ auth }) {
-    const [petOwner, setPetOwner] = useState([]);
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: "",
+        cpf: "",
+        phone_number: "",
+        address: "",
+        birth_date: "",
+    });
 
-    useEffect(() => {
-        // Fetch countries data from API
-        axios
-            .get("/api/pet_api")
-            .then((response) => {
-                setPetOwner(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+    const submit = (e) => {
+        e.preventDefault();
+        post(route('petowner.store'));
+    };
 
     return (
         <div>
@@ -34,68 +37,83 @@ function Create({ auth }) {
                         </h1>
                     </div>
 
-                    <form className="mb-[5vh] flex flex-col items-center w-[70%] bg-[#D6D6D6] rounded-[50px] pb-10">
-                        <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
-                            <label className="font-bold">Nome</label>
-                            <TextInput
-                            placeholder="Nome"
-                            nome="Nome"
-                            type="text"
-                            name="nome"
-                            className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
-                        />
-                        </div>
-                        <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
-                            <label className="font-bold">CPF:</label>
-                            <CPFInput
-                                id="cpf"
-                                type="cpf"
-                                name="cpf"
-                                value="000.000.000-00"
-                                className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
-                                autoComplete="cpf"
-                                onChange={(e) => setData("cpf", e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
-                        <label className="font-bold">Número de telefone:</label>
-                        <TextInput
-                            placeholder="Digite aqui seu número"
-                            nome="Telefone"
-                            type="text"
-                            name="telefone"
-                            className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
-                        />
-                        </div>
-                        <div className="flex flex-col items-center justify-center mt-10 w-[60%]">
-                            <label className="font-bold">Endereço:</label>
-                            <TextInput
-                                placeholder="Digite seu endereço"
-                                id="Endereco"
-                                type="text"
-                                name="Endereco"
-                                className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
-                                autoComplete="Endereco"
-                                onChange={(e) => setData("Endereco", e.target.value)}
-                                required
-                            />
-                        </div>
-                        <FormInput
-                            placeholder="Data de nascimento"
-                            nome="Data de nascimento"
-                            type="date"
-                            name="datanascimento"
-                        />
+                    <div className="m-[5vh] flex flex-col items-center max-w-[500px] w-full bg-[#D6D6D6] rounded-[50px] pb-10">
+                        <div className="w-full flex flex-col items-center justify-center m-[30px] gap-[20px]">
+                            <div className="flex flex-col w-[60%]">
+                                <InputLabel htmlFor="name">Nome:</InputLabel>
+                                <TextInput
 
-                        <PrimaryButton className="text-white mt-10">
-                            Cadastrar
-                        </PrimaryButton>
-                    </form>
+                                    placeholder="Ex: João da Silva"
+                                    id="name"
+                                    name="name"
+                                    className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                                    value={data.name}
+                                    onChange={(e) => setData("name", e.target.value)}
+                                />
+                                <InputError message={errors.name} />
+
+                            </div>
+                            <div className="flex flex-col  w-[60%]">
+                                <InputLabel htmlFor="email">E-mail:</InputLabel>
+                                <TextInput
+                                    placeholder="Ex: pessoa@gmail.com"
+                                    id="email"
+                                    name="email"
+                                    className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                                    value={data.email}
+                                    onChange={(e) => setData("email", e.target.value)}
+                                />
+                                <InputError message={errors.email} />
+
+                            </div>
+                            <div className="flex flex-col w-[60%]">
+                                <InputLabel htmlFor="cpf">CPF:</InputLabel>
+                                <CPFInput id={"cpf"} name={"cpf"} value={data.cpf} onChange={(value) => setData("cpf", value)} />
+                                <InputError message={errors.cpf} />
+
+                            </div>
+                            <div className="flex flex-col w-[60%]">
+                                <InputLabel htmlFor="phone_number">Telefone Celular:</InputLabel>
+                                <PhoneInput id={"phone_number"} name={"phone_number"} value={data.phone_number} onChange={(value) => setData("phone_number", value)} />
+                                <InputError message={errors.phone_number} />
+                            </div>
+                            <div className="flex flex-col w-[60%]">
+                                <InputLabel htmlFor="address">Endereço de Residência:</InputLabel>
+                                <TextInput
+                                    id="address"
+                                    name="address"
+                                    placeholder="Ex: Rua das Flores, 123"
+                                    className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                                    autoComplete="address"
+                                    onChange={(e) => setData("address", e.target.value)}
+                                />
+                                <InputError message={errors.address} />
+                            </div>
+                            <div className="flex flex-col w-[60%]">
+                                <InputLabel htmlFor="birth_date">Data de Nascimento:</InputLabel>
+                                <TimestampInput
+                                    id="birth_date"
+                                    name="birth_date"
+                                    label="Data de nascimento"
+                                    className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                                    value={data.birth_date}
+                                    onChange={(e) => setData("birth_date", e.target.value)}
+                                />
+                                <InputError message={errors.birth_date} />
+                            </div>
+                        </div>
+
+
+                        <form onSubmit={submit}>
+                            <PrimaryButton className="text-white" disabled={processing}>
+                                Registrar
+                            </PrimaryButton>
+                        </form>
+                    </div>
                 </div>
             </div>
             <Footer />
-        </div>
+        </div >
     );
 }
 

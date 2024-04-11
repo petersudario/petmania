@@ -1,44 +1,29 @@
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React from 'react';
 
-const formatCPF = (cpf) => {
-  cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+const CPFInput = ({ id, name, value, onChange }) => {
+  const handleCPFChange = (event) => {
+    // Remove caracteres não numéricos do CPF
+    const newCPF = event.target.value.replace(/\D/g, '');
 
-  if (cpf.length > 3) {
-    cpf = cpf.substring(0, 3) + '.' + cpf.substring(3);
-  }
-  if (cpf.length > 7) {
-    cpf = cpf.substring(0, 7) + '.' + cpf.substring(7);
-  }
-  if (cpf.length > 11) {
-    cpf = cpf.substring(0, 11) + '-' + cpf.substring(11);
-  }
-  if (cpf.length > 14) {
-    cpf = cpf.substring(0, 14);
-  }
+    // Formata o CPF inserindo pontos e traço
+    const formattedCPF = newCPF.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 
-  return cpf;
-};
-
-const CPFInput = forwardRef(({ value, className = '', isFocused = false, ...props }, ref) => {
-  const inputRef = useRef();
-
-  useEffect(() => {
-    if (isFocused && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isFocused]);
-
-  const formattedCPF = formatCPF(value);
+    onChange(formattedCPF);
+  };
 
   return (
-    <input
-      {...props}
-      type="text"
-      value={formattedCPF}
-      className={'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm' + className}
-      ref={ref || inputRef}
-    />
+    <div>
+      <input
+        type="text"
+        id={id}
+        name={name}
+        value={value}
+        onChange={handleCPFChange}
+        maxLength={14} // Limita a quantidade de caracteres
+        placeholder="123.456.789-00" // Exemplo de formato esperado
+      />
+    </div>
   );
-});
+};
 
 export default CPFInput;

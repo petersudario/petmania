@@ -12,7 +12,7 @@ const TimestampInput = forwardRef(({ className = '', isFocused = false, ...props
     return (
         <input
             {...props}
-            type="datetime-local" 
+            type="date" 
             className={
                 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm' +
                 className
