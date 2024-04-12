@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\Owner;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
@@ -22,9 +24,12 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string', 'min:8'],
+            'name' => 'required|string|min:10|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:' . Owner::class . '|unique:' . User::class,
+            'password' => 'required|password|confirmed',
+            'cpf' => 'required|cpf|string|unique:' . Owner::class . '|unique:' . User::class,
+            'phone_number' => 'required|string|min:14|max:14',
+            'birth_date' => 'required|date|birth_date',
         ];
     }
 
@@ -32,17 +37,24 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name.required' => 'O campo nome é obrigatório.',
-            'name.max' => 'O campo nome deve ter no máximo 255 caracteres.',
-            'email.required' => 'O campo email é obrigatório.',
-            'email.string' => 'O campo email deve ser uma string.',
-            'email.email' => 'O campo email deve ser um endereço de e-mail válido.',
+            'name.min' => 'O nome deve ter no mínimo 10 caracteres.',
+            'name.max' => 'O nome deve ter no máximo 255 caracteres.',
             'password.required' => 'O campo senha é obrigatório.',
-            'cpf.required' => 'O campo cpf é obrigatório.',
-            'cpf.max' => 'O campo cpf deve ter no máximo 11 caracteres.',
-            'cpf.cpf' => 'O campo cpf deve ser um CPF válido.',
-            'cpf.min' => 'O campo cpf deve ter no mínimo 11 caracteres.',
-            'password.min' => 'O campo senha deve ter no mínimo 8 caracteres.'
-
+            'password.confirmed' => 'As senhas não coincidem.',
+            'password.password' => 'A senha deve conter no mínimo 8 caracteres, uma letra maiúscula, uma letra minúscula, dois números e um caractere especial.',
+            'email.unique' => 'O email informado já está em uso.',
+            'email.email' => 'O email informado não é válido.',
+            'email.required' => 'O campo email é obrigatório.',
+            'email.max' => 'O email informado é muito longo.',
+            'email.lowercase' => 'O email informado deve ser minúsculo.',
+            'cpf.required' => 'O campo CPF é obrigatório.',
+            'cpf.cpf' => 'O CPF informado é inválido.',
+            'cpf.unique' => 'O CPF informado já está em uso.', 
+            'birth_date.required' => 'O campo data de nascimento é obrigatório.',
+            'birth_date.date' => 'O campo data de nascimento deve ser uma data válida.',
+            'birth_date.birth_date' => 'O campo data de nascimento deve ser uma data válida de pelo menos 2 anos de idade.',
+            'phone_number.required' => 'O campo telefone é obrigatório.',
+            'phone_number.min' => 'O telefone informado é inválido.',
         ];
     }
 }

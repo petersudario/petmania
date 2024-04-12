@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\Owner;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -30,17 +31,7 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'cpf' => 'required|string|unique:'.User::class,
-            'phone_number' => 'required|string|min:14|max:14',
-            'birth_date' => 'required|date',
-            'password' => ['required', 'confirmed', 'min:8'],
-
-            
-        ], ['email.unique' => 'O email informado já está em uso.', 'cpf.unique' => 'O CPF informado já está em uso.', 'password.confirmed' => 'As senhas não coincidem.']);
-
+ 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
