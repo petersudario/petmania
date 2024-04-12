@@ -64,7 +64,7 @@ export default function Register() {
                         </div>
                         <div className="w-full flex flex-col">
                             <InputLabel htmlFor="phone_number">Telefone Celular:</InputLabel>
-                            <PhoneInput id={"phone_number"} name={"phone_number"} value={data.phone_number} onChange={(value) => setData("phone_number", value)} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12"/>
+                            <PhoneInput id={"phone_number"} name={"phone_number"} value={data.phone_number} onChange={(value) => setData("phone_number", value)} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" required/>
                             <InputError message={errors.phone_number} />
                         </div>
                         <div className="w-full flex flex-col">
