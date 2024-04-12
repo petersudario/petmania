@@ -49,7 +49,9 @@ export default function Navbar({ auth }) {
                                 <NavLink href={route('login')} active={route().current('login')}>
                                     Login
                                 </NavLink>
-
+                                <NavLink href={route('register')} active={route().current('register')}>
+                                    Register
+                                </NavLink>
                             </div>
                         )}
 
@@ -136,18 +138,24 @@ export default function Navbar({ auth }) {
                     <ResponsiveNavLink href={route('contacts')} active={route().current('contacts')}>
                         Contato
                     </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('login')} active={route().current('login')}>
+                        Login
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('register')} active={route().current('register')}>
+                        Register
+                    </ResponsiveNavLink>
                 </div>
                 {auth.user && (
                     <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
 
                         <div className="pt-4 pb-1 border-t border-gray-200">
                             <div className="px-4">
-                                <div className="font-medium text-base text-gray-800">{auth.user.name}</div>
-                                <div className="font-medium text-sm text-gray-500">{auth.user.email}</div>
+                                <div className="font-medium text-base text-white">{auth.user.name}</div>
+                                <div className="font-medium text-sm text-white">{auth.user.email}</div>
                             </div>
 
                             <div className="mt-3 space-y-1">
-                                <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                                <ResponsiveNavLink href={route('profile.edit')} active={route().current('profile.edit')}>Profile</ResponsiveNavLink>
                                 <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                     Log Out
                                 </ResponsiveNavLink>
