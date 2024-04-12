@@ -34,7 +34,10 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'cpf' => 'required|string|unique:'.User::class,
+            'phone_number' => 'required|string|min:14|max:14',
+            'birth_date' => 'required|date',
             'password' => ['required', 'confirmed', 'min:8'],
+
             
         ], ['email.unique' => 'O email informado já está em uso.', 'cpf.unique' => 'O CPF informado já está em uso.', 'password.confirmed' => 'As senhas não coincidem.']);
 
@@ -42,6 +45,8 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'cpf' => $request->cpf,
+            'phone_number' => $request->phone_number,
+            'birth_date' => $request->birth_date,
             'password' => Hash::make($request->password),
         ]);
 

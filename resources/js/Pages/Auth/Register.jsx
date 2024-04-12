@@ -7,12 +7,15 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import CPFInput from '@/Components/CPFInput';
+import PhoneInput from '@/Components/PhoneInput';
+import TimestampInput from '@/Components/TimestampInput';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
         cpf: '',
+        phone_number: '',
         password: '',
         password_confirmation: '',
 
@@ -59,17 +62,34 @@ export default function Register() {
                             <CPFInput id={"cpf"} name={"cpf"} value={data.cpf} onChange={(value) => setData("cpf", value)} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" autoComplete="cpf" required />
                             <InputError message={errors.cpf} />
                         </div>
+                        <div className="w-full flex flex-col">
+                            <InputLabel htmlFor="phone_number">Telefone Celular:</InputLabel>
+                            <PhoneInput id={"phone_number"} name={"phone_number"} value={data.phone_number} onChange={(value) => setData("phone_number", value)} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12"/>
+                            <InputError message={errors.phone_number} />
+                        </div>
+                        <div className="w-full flex flex-col">
+                                <InputLabel htmlFor="birth_date">Data de Nascimento:</InputLabel>
+                                <TimestampInput
+                                    id="birth_date"
+                                    name="birth_date"
+                                    label="Data de nascimento"
+                                    className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                                    value={data.birth_date}
+                                    onChange={(e) => setData("birth_date", e.target.value)}
+                                />
+                                <InputError message={errors.birth_date} />
+                            </div>
 
                         <div className='w-full flex flex-col'>
                             <InputLabel htmlFor="password" value="Password" />
-                            <TextInput id="password" type="password" name="password" value={data.password} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" autoComplete="new-password" onChange={(e) => setData('password', e.target.value)} required/>
+                            <TextInput id="password" type="password" name="password" value={data.password} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" autoComplete="new-password" onChange={(e) => setData('password', e.target.value)} required />
                             <InputError message={errors.password} />
                         </div>
                         <div className='w-full flex flex-col'>
                             <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
                             <TextInput id="password_confirmation" type="password" name="password_confirmation" value={data.password_confirmation} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" autoComplete="new-password" onChange={(e) => setData('password_confirmation', e.target.value)} required />
                         </div>
-                        
+
                         <form onSubmit={submit}>
                             <PrimaryButton className="text-white" disabled={processing}>
                                 Cadastrar
