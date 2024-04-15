@@ -1,0 +1,22 @@
+ul li:nth-child(even) {
+    background-color: #eaeaea; /* Cor de fundo para linhas pares */
+}
+
+/* Estilo para linhas ímpares */
+ul li:nth-child(odd) {
+    background-color: #f3ffff; /* Cor de fundo para linhas ímpares */
+
+}
+
+li {
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 85vw;
+    height: 80px;
+}
+
+li img{
+    border-radius: 50px;
+}
