@@ -117,17 +117,17 @@ export default function Navbar({ auth }) {
 
             <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden text-white'}>
                 <div className="pt-2 pb-3 space-y-1 text-white">
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('homepage')}>
+                    <ResponsiveNavLink href={route('homepage')} active={route().current('homepage')} className='text-white hover:text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
                         Home
                     </ResponsiveNavLink>
 
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('')}>
+                    <ResponsiveNavLink href={route('homepage')} active={route().current('')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
                         Sobre
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('')}>
+                    <ResponsiveNavLink href={route('homepage')} active={route().current('')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
                         Agenda
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('')}>
+                    <ResponsiveNavLink href={route('homepage')} active={route().current('')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
                         Contato
                     </ResponsiveNavLink>
                 </div>
