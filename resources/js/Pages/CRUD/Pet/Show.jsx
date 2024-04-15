@@ -17,6 +17,7 @@ import Footer from "../../Footer.jsx";
 export default function Edit({auth}) {
     const [nomePet, setNomePet] = useState("Luly");
     const [racapet, setracaPet] = useState("Yorkshire");
+    const [corpet, setcorpet] = useState("Preto com marrom");
     const [datapet, setdata] = useState("2018-02-14");
     const [obspet, setobs] = useState("Parece o demônio de nervosa");
     const [escolha, setEscolha] = useState("sim");
@@ -27,6 +28,9 @@ export default function Edit({auth}) {
     const Mudaraca = (event) => {
         setracaPet(event.target.value);
     };
+    const Mudacor = (event) =>{
+        setcorpet(event.target.value);
+    }
     const Mudaobs = (event) => {
         setobs(event.target.value);
     };
@@ -45,23 +49,22 @@ export default function Edit({auth}) {
                     Modificação de um pet
                 </h1>
 
-                <div className="w-[700px] h-[700px] bg-gray-200 mb-20 flex flex-row rounded-[50px] mb-[20px]">
-                    <div className="w-[20%] h-[30%] mt-[50px] ml-[50px] flex flex-col items-center">
+                <div className="md:w-[700px] w-[500px] h-[1300px] md:h-[735px] bg-gray-200 mb-20 flex md:flex-row flex-col rounded-[50px] mb-[20px]">
+                    <div className="md:w-[20%] h-[20%] mt-10 md:mt-[50px] md:ml-[50px] flex flex-col items-center">
                         <img src={Chorro3} className="h-[200px] rounded-[100px]"/>
 
-                        <button className="bg-white mt-[20px] w-[90%] rounded-[80px] font-bold border-2 border-paleta-3 hover:border-paleta-6 text-paleta-3  "> Alterar foto </button>
+                        <button className="bg-white mt-[20px] w-[80%] rounded-[80px] font-bold border-2 border-paleta-3 hover:border-paleta-6 text-paleta-3  "> Alterar foto </button>
                     </div>
-
-                    <div className="ml-[10%] pt-[70px] font-extrabold">
-                        <label className="ml-5 mb-4 text-[20px]"> Nome: </label><br/>
+                    <div className="md:ml-[10%] ml-0 pt-[40px] font-extrabold md:block flex flex-col items-center">
+                        <label className="md:ml-5 md:mb-4 text-[20px]"> Nome: </label><br/>
                         <input label="Nome do pet:" placeholder="Nome do Pet" value={nomePet} onChange={Mudanome} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
-                        <label className="ml-5 mb-4 text-[20px]"> Raça: </label><br/>
+                        <label className="md:ml-5 md:mb-4 text-[20px]"> Raça: </label><br/>
                         <input label="Nome do pet:" placeholder="Nome do Pet" value={racapet} onChange={Mudaraca} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
-                        <label className="ml-5 mb-4 text-[20px]"> Data de nascimento: </label><br/>
-                        <input label="Nome do pet:" type="date" placeholder="Nome do Pet" value={datapet} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
-                        <label className="ml-5 mb-4 text-[20px]"> Vacinado: </label><br/>
-                        <div className="flex flex-row w-[30px] pb-[10px]">
-                            <label className="flex flex-row items-center justify-center">
+                        <label className="md:ml-5 md:mb-4 text-[20px]"> Cor: </label><br/>
+                        <input label="Nome do pet:" placeholder="Nome do Pet" value={corpet} onChange={Mudacor} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
+                        <label className="md:ml-5 md:mb-4 text-[20px] mt-[-10px]"> Vacinado: </label><br/>
+                        <div className="flex flex-row w-[30px] pb-[10px] w-[80%] md:justify-start justify-center mb-[20px] md:mt-[10px]">
+                            <label className="flex flex-row items-center">
                                 <input
                                     className="mr-[5px]"
                                     type="radio"
@@ -85,7 +88,9 @@ export default function Edit({auth}) {
                                 Não
                             </label>
                         </div>
-                        <label className="ml-5 mb-4 text-[20px]"> Observação: </label><br/>
+                        <label className="md:ml-5 md:mb-4 text-[20px]"> Data de nascimento: </label><br/>
+                        <input label="Nome do pet:" type="date" placeholder="Nome do Pet" value={datapet} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
+                        <label className="md:ml-5 md:mb-4 text-[20px]"> Observação: </label><br/>
                         <textarea label="Nome do pet:" placeholder="Nome do Pet" value={obspet} onChange={Mudaobs} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
                         <button className="bg-paleta-8 text-white w-[150px] h-[50px] text-[25px] rounded-[60px]">Salvar</button>
                     </div>

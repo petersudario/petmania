@@ -36,60 +36,7 @@ export default function Edit({pet}, {auth}) {
 
   return (
       <> 
-        <Navbar auth={auth}/>   
-          <div className="h-[90vh] flex flex-col items-center ">
-
-              <h1 className="font-extrabold text-3xl mt-10 mb-10">
-                  Modificação de um pet
-              </h1>
-
-              <div className="w-[700px] h-[700px] bg-gray-200 mb-20 flex flex-row rounded-[50px] relative">
-                  <div className="w-[20%] h-[30%] mt-[50px] ml-[50px] flex flex-col items-center">
-                      <img src={Chorro3} className="h-[200px] rounded-[100px]"/>
-
-                      <button className="bg-white mt-[20px] w-[90%] rounded-[80px] font-bold border-2 border-paleta-3 hover:border-paleta-6 text-paleta-3  "> Alterar foto </button>
-                  </div>
-
-                  <div className="ml-[10%] pt-[70px] font-extrabold">
-                      <label className="ml-5 mb-4 text-[20px]"> Nome: </label><br/>
-                      <input label="Nome do pet:" placeholder="Nome do Pet" value={nomePet} onChange={Mudanome} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
-                      <label className="ml-5 mb-4 text-[20px]"> Raça: </label><br/>
-                      <input label="Nome do pet:" placeholder="Nome do Pet" value={racapet} onChange={Mudaraca} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
-                      <label className="ml-5 mb-4 text-[20px]"> Data de nascimento: </label><br/>
-                      <input label="Nome do pet:" type="date" placeholder="Nome do Pet" value={datapet} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
-                      <label className="ml-5 mb-4 text-[20px]"> Vacinado: </label><br/>
-                      <div className="flex flex-row w-[30px] pb-[10px]">
-                          <label className="flex flex-row items-center justify-center">
-                              <input
-                                  className="mr-[5px]"
-                                  type="radio"
-                                  name="escolha"
-                                  value="sim"
-                                  checked={escolha === "sim"}
-                                  onChange={Mudavacina}
-                              />
-                              Sim
-                          </label>
-
-                          <label className="flex flex-row items-center justify-center">
-                              <input
-                                  className="mr-[10px] ml-[10px]"
-                                  type="radio"
-                                  name="escolha"
-                                  value="nao"
-                                  checked={escolha === "nao"}
-                                  onChange={Mudavacina}
-                              />
-                              Não
-                          </label>
-                      </div>
-                      <label className="ml-5 mb-4 text-[20px]"> Observação: </label><br/>
-                      <textarea label="Nome do pet:" placeholder="Nome do Pet" value={obspet} onChange={Mudaobs} className="w-[400px] rounded-[50px] mb-[30px]" /><br/>
-                      <button className="bg-paleta-8 text-white w-[150px] h-[50px] text-[25px] rounded-[60px]">Salvar</button>
-                  </div>
-              </div>
-          </div>
-          <Footer />
+        <h1>Não sei o porque está no show, mas está</h1>
       </>
   );
 }
