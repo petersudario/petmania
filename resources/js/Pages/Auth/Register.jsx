@@ -18,6 +18,8 @@ export default function Register({auth}) {
         email: '',
         cpf: '',
         phone_number: '',
+        address: '',
+        birth_date: '',
         password: '',
         password_confirmation: '',
 
@@ -71,6 +73,18 @@ export default function Register({auth}) {
                                 <InputLabel htmlFor="phone_number">Telefone Celular:</InputLabel>
                                 <PhoneInput id={"phone_number"} name={"phone_number"} value={data.phone_number} onChange={(value) => setData("phone_number", value)} className="w-full text-black my-2 bg-transparent outline-none focus:outline-none border border-black pl-4 pr-4 h-12" required />
                                 <InputError message={errors.phone_number} />
+                            </div>
+                            <div className="w-full flex flex-col">
+                                <InputLabel htmlFor="address">Endereço de Residência:</InputLabel>
+                                <TextInput
+                                    id="address"
+                                    name="address"
+                                    placeholder="Ex: Rua das Flores, 123"
+                                    className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                                    autoComplete="address"
+                                    onChange={(e) => setData("address", e.target.value)}
+                                />
+                                <InputError message={errors.address} />
                             </div>
                             <div className="w-full flex flex-col">
                                 <InputLabel htmlFor="birth_date">Data de Nascimento:</InputLabel>
