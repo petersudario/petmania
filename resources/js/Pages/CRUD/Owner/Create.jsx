@@ -31,9 +31,7 @@ function Create({ auth }) {
                 <Navbar auth={auth} />
                 <div className="flex flex-col items-center">
                     <div className="w-auto flex flex-col justify-center items-center mx-5 mt-14 mb-5">
-                        <h1 className="xl:text-[33px] lg:text-2xl md:text[18px] font-bold">
-                            Ei! Você que é dono de Pet, sua jornada começa por
-                            aqui!
+                        <h1 className="xl:text-[33px] lg:text-2xl md:text[18px] font-bold">Adicionar novo dono de pet
                         </h1>
                     </div>
 

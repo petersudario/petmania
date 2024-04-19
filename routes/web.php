@@ -31,6 +31,9 @@ Route::get("/sobre", function () {
     return Inertia::render('Dashboard');
 })->name('about');
 
+Route::post('/pet/{id}', [PetController::class, 'update'])->name('petaxios.update');
+
+
 Route::get("/", [HomepageController::class, 'index'])->name('homepage');
 
 

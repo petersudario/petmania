@@ -9,7 +9,9 @@ export default function Navbar({ auth }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
+        
         <nav className="bg-paleta-3 z-50 inset-0">
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="w-full flex h-16">
                     <div className="w-full flex items-center justify-evenly text-white">

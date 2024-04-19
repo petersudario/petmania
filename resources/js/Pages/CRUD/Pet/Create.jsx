@@ -1,189 +1,151 @@
-import React, { useState, useEffect } from 'react';
-import Logo from '../../../../../public/images/logo.png';
 import '../../../../css/agenda.css'
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import Footer from '../../Footer.jsx';
 import Navbar from '../../Navbar.jsx';
 import Dog from '../../../../../public/images/dog.svg'
-import DateInput from '@/Components/DataInput';
-import Formulario from '@/Components/Formulario';
-import RadioInput from '@/Components/SelectInput';
-import { Component } from 'react';
-import InputLabel from '@/Components/InputLabel';
+import TimestampInput from '@/Components/TimestampInput';
+import { useForm } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import SelectInput from '@/Components/SelectInput';
 import InputError from '@/Components/InputError';
-
+import InputLabel from '@/Components/InputLabel';
+import SearchBar from '@/Components/SearchBar';
+import { useState, useEffect } from 'react';
 
 export default function CreatePet({ auth }) {
-  const [vacinado, setVacinado] = useState(false);
 
-  const [formData, setFormData, selectedNome, setSelectedNome, selectedRaca, setSelectedRaca, selectedRemark, setSelectedRemark] = useState({
-    nomepet: '',
-    especiepet: '',
+  const [selectedId, setSelectedId] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
+  const { data, setData, post, processing, errors, reset } = useForm({
+    pet_name: '',
+    specie: '',
     remark: '',
+    birth_date: '',
+    image: '',
+    vacinado: 0,
+    owner_id: '',
   });
-  const handleNameChange = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      nomepet: e.target.value,
-    }));
-  };
 
-  const handleSpeciesChange = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      especiepet: e.target.value,
-    }));
-  };
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(file);
-  };
-  const handleVacinadoChange = (event) => {
-    setVacinado(event.target.value === 'sim');
-  };
-
-  const handleRemarkChange = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      remark: e.target.value,
-    }));
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    // Adicione aqui a lógica para enviar os dados
-    axios.post('/pet', formData)
-
-      .then((response) => {
-        // Lidar com a resposta do servidor, se necessário
-        console.log(response.data);
+  const handleSearch = (query) => {
+    fetch(`/api/search?query=${query}`)
+      .then(response => response.json())
+      .then(data => {
+        setSearchResults(data);
       })
-      .catch((error) => {
-        // Lidar com erros de solicitação, se necessário
-        console.error('Erro ao enviar os dados:', error);
+      .catch(error => {
+        console.error('Error fetching search results:', error);
       });
+  };
+
+  const handleChange = (id) => {
+    setSelectedId(id);
+    setData('owner_id', id); // Set owner_id in form data
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    post(route('pet.store'));
   };
 
   return (
     <>
       <Navbar auth={auth} />
-      <div>
-        <div className=' fundo-div min-h-screen py-20'>
 
-          <div className='container mx-auto'>
-            <div className='flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden'>
-              <div className='w-full lg:w-1/2 md:flex hidden flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center'>
-                <img src={Dog} className='w-[300px] md:w-[80%] hidden md:block  lg:mr-[20px]' />
-                <div>
-                  <p className='text-black font-medium'>Adicione aqui as Informações sobre o seu pet!</p>
+      <div className=' fundo-div min-h-screen py-20'>
+
+        <div className='container mx-auto'>
+          <div className='flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden'>
+            <div className='w-full lg:w-1/2 md:flex hidden flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center'>
+              <img src={Dog} className='w-[300px] md:w-[80%] hidden md:block  lg:mr-[20px]' />
+
+            </div>
+
+            <div className='w-full lg:w-1/2 py-16 px-12'>
+              <h5 className="text-3xl mb-4">Informações do Pet</h5>
+
+              <div className='my-2'>
+
+                <div className='divisoria-cadastro rounded-md'>
+                  <label> Nome do pet: </label>
+                  <TextInput
+                    placeholder="Nome do Pet"
+                    pattern=".{3,}"
+                    title="Digite pelo menos 3 caracteres"
+                    value={data.pet_name}
+                    onChange={(e) => setData("pet_name", e.target.value)}
+                    required
+                  />
+                  <InputError message={errors.pet_name} />
                 </div>
-              </div>
+                <div className='divisoria-cadastro rounded-md'>
+                  <label>Dono do pet: </label>
+                  <SearchBar onSearch={handleSearch} searchResults={searchResults} onChange={handleChange} />
+                  <input type="hidden" id='owner_id' name='owner_id' value={selectedId} onChange={() => { }} />
 
-              <div className='w-full lg:w-1/2 py-16 px-12'>
-                <h5 className="text-3xl mb-4">Informações do Pet</h5>
+                </div>
+                <div className='divisoria-cadastro rounded-md'>
+                  <label> Anexe uma foto do pet </label>
+                  <input id="image" name="image" type="file" onChange={(e) => setData("image", e.target.files[0])} />
+                </div>
+                <div className='divisoria-cadastro rounded-md'>
+                  <label> Raça do pet: </label>
+                  <TextInput
+                    label="Especie do pet:"
+                    name="specie"
+                    placeholder="Raça do Pet"
+                    pattern=".{5,}"
+                    title="Digite pelo menos 5 caracteres"
+                    value={data.specie}
+                    onChange={(e) => setData("specie", e.target.value)}
+                    required
+                  />
+                  <InputError message={errors.specie} />
 
-                <div className='my-2'>
+                </div>
+                <div className='divisoria-cadastro rounded-md'>
+                  <label> Vacinado: </label>
+                  <div className='flex flex-row'>
+                    <div>
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value={data.vacinado} id='vacinado' name='vacinado' onChange={(e) => setData("vacinado", e.target.value)} className="sr-only peer" />
 
-                  <div className='divisoria-cadastro rounded-md'>
-                    <label> Nome do pet: </label>
-                    <TextInput
-                      label="Nome do pet:"
-                      placeholder="Nome do Pet"
-                      pattern=".{3,}"
-                      title="Digite pelo menos 3 caracteres"
-                      value={selectedNome}
-                      onChange={handleNameChange}
-                      required
-                    />
-                  </div>
-                  <div className='divisoria-cadastro rounded-md'>
-                    <label> Foto do pet: </label>
-                    <input
-                      type="file"
-                      accept=".png, .jpg, .jpeg"
-                      onChange={handleImageUpload}
-                    />
-                  </div>
-                  <div className='divisoria-cadastro rounded-md'>
-                    <label> Raça do pet: </label>
-                    <TextInput
-                      label="Especie do pet:"
-                      placeholder="Raça do Pet"
-                      pattern=".{5,}"
-                      title="Digite pelo menos 5 caracteres"
-                      value={selectedRaca}
-                      onChange={handleSpeciesChange}
-                      required
-                    />
-                  </div>
-                  <div className='divisoria-cadastro rounded-md'>
-                    <label>Cor do pet:</label>
-                    <TextInput
-                      label="Cor"
-                      placeholder="Marrom, caramelo, preto..."
-                      value={selectedRemark}
-                      onChange={handleRemarkChange}
-                      required
-                    />
-                  </div>
-                  <div className='divisoria-cadastro rounded-md'>
-                    <label> Vacinado: </label>
-                    <div className='flex flex-row'>
-                      <div>
-                        <input
-                          type="radio"
-                          id="vacinadoSim"
-                          name="vacinado"
-                          value="sim"
-                          checked={vacinado === true}
-                          onChange={handleVacinadoChange}
-                          required
-                        />
-                        <label className='mr-2' htmlFor="vacinadoSim">Sim</label>
-                      </div>
-                      <div>
-                        <input
-                          type="radio"
-                          id="vacinadoNao"
-                          name="vacinado"
-                          value="nao"
-                          checked={vacinado === false}
-                          onChange={handleVacinadoChange}
-                          required
-                        />
-                        <label htmlFor="vacinadoNao">Não</label>
-                      </div>
+                        <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                        <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
+                      </label>
                     </div>
                   </div>
-                  <div className='divisoria-cadastro rounded-md'>
-                    <DateInput
-                      label="Data de nascimento:"
-                      type="date"
-                      value={selectedRemark}
-                      onChange={handleRemarkChange}
-                      required
-                    />
-                  </div>
-                  <div className='divisoria-cadastro rounded-md'>
-                    <label>Observação sobre o pet:</label>
-                    <TextInput
-                      label="Comportamento do pet:"
-                      placeholder="Alguma doença, comportamento dele..."
-                      value={selectedRemark}
-                      onChange={handleRemarkChange}
-                    />
-                  </div>
+                </div>
+                <div className='divisoria-cadastro rounded-md'>
+                  <InputLabel htmlFor="birth_date">Data de Nascimento:</InputLabel>
+
+                  <TimestampInput
+                    id="birth_date"
+                    name="birth_date"
+                    label="Data de nascimento"
+                    className="font-bold text-black mt-1 block w-full bg-[#f5f5f5] flex flex-col border-[1.5px] border-[#757575] rounded-[0px]"
+                    value={data.birth_date}
+                    onChange={(e) => setData("birth_date", e.target.value)}
+                  />
+
+                  <InputError message={errors.birth_date} />
 
                 </div>
-                <PrimaryButton className="text-white" onClick={handleSubmit}>Cadastrar Pet</PrimaryButton>
+                <div className='divisoria-cadastro rounded-md'>
+                  <label>Observação sobre o pet:</label>
+                  <TextInput
+                    label="Notas sobre o pet:"
+                    id="remark"
+                    name="remark"
+                    placeholder="Alguma doença, comportamento dele..."
+                    value={data.remark}
+                    onChange={(e) => setData("remark", e.target.value)}
+                  />
+                </div>
+
+                <form onSubmit={submit}>
+                  <PrimaryButton className="text-white" disabled={processing}>
+                    Cadastrar
+                  </PrimaryButton>
+                </form>
               </div>
-
-
             </div>
           </div>
         </div>
