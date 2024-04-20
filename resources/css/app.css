@@ -51,3 +51,38 @@
     flex-direction: row;
 
 }
+
+.fundo-div{
+    background-color: rgb(226 232 240);
+}
+
+.divisoria-cadastro{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 10px;
+    padding: 10px;
+    background-color: rgb(232, 238, 245);
+}
+
+ul li:nth-child(even) {
+    background-color: #eaeaea; /* Cor de fundo para linhas pares */
+}
+
+/* Estilo para linhas ímpares */
+ul li:nth-child(odd) {
+    background-color: #f3ffff; /* Cor de fundo para linhas ímpares */
+
+}
+
+li {
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 85vw;
+    height: 80px;
+}
+
+li img{
+    border-radius: 50px;
+}

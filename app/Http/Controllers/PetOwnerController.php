@@ -14,7 +14,7 @@ class PetOwnerController extends Controller
      */
     public function index()
     {
-        return Inertia::render('CRUD/Owner/Index', ['owners' => Owner::all()]);
+        return Inertia::render('Owner/Index', ['owners' => Owner::all()]);
     }
 
     /**
@@ -22,7 +22,7 @@ class PetOwnerController extends Controller
      */
     public function create()
     {
-        return Inertia::render('CRUD/Owner/Create');
+        return Inertia::render('Owner/Create');
     }
 
     /**

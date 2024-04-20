@@ -1,17 +1,13 @@
 import React from 'react';
 import { Link, Head } from '@inertiajs/react';
-import Navbar from './Navbar.jsx';
-import Footer from './Footer.jsx';
-import Logo from '../../../public/images/logo.png';
+import AppLayout from '@/Layouts/AppLayout';
 
 const Dashboard = ({ auth, laravelVersion, phpVersion }) => {
     return (
-        <div>
+        <AppLayout auth={auth}>
             <Head>
                 <title>Dashboard</title>
             </Head>
-
-            <Navbar auth={auth} />
 
             <div className="flex flex-col min-h-screen">
                 <div className="flex-1 bg-gray-900 p-4 md:p-10 text-white">
@@ -29,7 +25,7 @@ const Dashboard = ({ auth, laravelVersion, phpVersion }) => {
                             </Link>
                         </div>
                     </div>
-                    
+
                     <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out mb-6">
                         <h2 className="text-xl md:text-2xl font-semibold mb-2 text-black">Pets</h2>
                         <p className="text-sm md:text-base text-gray-600">Gerencie os pets cadastrados.</p>
@@ -123,10 +119,8 @@ const Dashboard = ({ auth, laravelVersion, phpVersion }) => {
                         <p className="text-gray-600">Algumas informações adicionais sobre o seu dashboard podem ser adicionadas aqui.</p>
                     </div>
                 </div>
-
-                <Footer />
             </div>
-        </div>
+        </AppLayout>
     );
 };
 

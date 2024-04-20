@@ -1,11 +1,8 @@
-import Navbar from '../../Navbar.jsx';
-import Footer from "@/Pages/Footer.jsx";
-import '../../../../css/petindex.css';
 import { usePage } from '@inertiajs/react';
 import DeleteModal from '@/Components/DeleteModal.jsx';
 import { useState } from 'react';
-import { redirect } from 'react-router-dom';
 import EditModal from '@/Components/EditModal.jsx';
+import AppLayout from '@/Layouts/AppLayout.jsx';
 
 export default function Index({ auth }) {
 
@@ -16,7 +13,6 @@ export default function Index({ auth }) {
 
     const [deleteOpenModalId, setDeleteOpenModalId] = useState(null);
     const [editOpenModalId, setEditOpenModalId] = useState(null);
-
 
     const openDeleteModal = (petId) => {
         setDeleteOpenModalId(petId);
@@ -35,8 +31,7 @@ export default function Index({ auth }) {
     }
 
     return (
-        <>
-            <Navbar auth={auth} />
+        <AppLayout auth={auth}>
             <div className="h-[100vh]">
                 <div className="flex flex-col items-center items-center">
                     <div className='w-full'>
@@ -50,8 +45,8 @@ export default function Index({ auth }) {
                                     <a href={route('pet.create')} className="bg-green-500 text-white px-4 py-2 rounded-lg md:text-lg">Adicionar Pet</a>
                                 </li>
                             ) : (
-                                pets.map((pet) => (
-                                    <li key={pet.id} className="font-bold flex flex-row justify-between items-center w-full h-fit py-4 border-b border-gray-300">
+                                pets.map((pet, index) => (
+                                    <li key={pet.id} className={`font-bold flex flex-row justify-between items-center w-full h-fit py-4 border-b border-gray-300 ${index % 2 === 0 ? 'bg-gray-200' : 'bg-blue-50'}`}>
                                         <div className='flex items-center space-x-4 p-[60px]'>
                                             {pet.image_url != null && (
                                                 <img src={"/images/" + pet.image_url} className="w-[200px] rounded-full border border-gray-300" alt={`Image of ${pet.pet_name}`} />
@@ -75,7 +70,7 @@ export default function Index({ auth }) {
                                             <button onClick={() => openDeleteModal(pet.id)} className="bg-red-500 text-white px-4 py-2 rounded-lg md:text-lg">Remover</button>
                                             <DeleteModal show={deleteOpenModalId === pet.id} onClose={closeDeleteModal} petId={pet.id} petName={pet.pet_name} />
                                             <button onClick={() => openEditModal(pet.id)} className="bg-green-500 text-white px-4 py-2 rounded-lg md:text-lg">Modificar</button>
-                                            <EditModal show={editOpenModalId === pet.id} onClose={closeEditModal} petId={pet.id} petName={pet.pet_name} specie={pet.specie} birth_date={pet.birth_date} image_url={pet.image_url} fk_pet_owner_id={pet.fk_pet_owner_id} owners={owners}/>
+                                            <EditModal show={editOpenModalId === pet.id} onClose={closeEditModal} petId={pet.id} petName={pet.pet_name} specie={pet.specie} birth_date={pet.birth_date} image_url={pet.image_url} fk_pet_owner_id={pet.fk_pet_owner_id} owners={owners} />
                                         </div>
                                     </li>
                                 ))
@@ -84,9 +79,7 @@ export default function Index({ auth }) {
                     </ul>
                 </div>
             </div>
-            <Footer />
-        </>
+
+        </AppLayout>
     );
 }
-
-

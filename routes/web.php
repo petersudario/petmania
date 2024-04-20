@@ -24,11 +24,11 @@ use App\Http\Controllers\PetAPI;
 */
 
 Route::resource("agenda", AgendaController::class);
-Route::resource("pet", PetController::class);
+
 Route::get("/services", [ServicesController::class, 'index'])->name('services');
 Route::get("/contacts", [ContactsController::class, 'index'])->name('contacts');
 Route::get("/sobre", function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('About');
 })->name('about');
 
 Route::post('/pet/{id}', [PetController::class, 'update'])->name('petaxios.update');
@@ -43,7 +43,7 @@ Route::middleware('admin')->group(function () {
     })->name('dashboard');
 
     Route::resource('petowner', PetOwnerController::class);
-
+    Route::resource("pet", PetController::class);
 });
 
 

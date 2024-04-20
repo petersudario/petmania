@@ -1,6 +1,3 @@
-import '../../../../css/agenda.css'
-import Navbar from '../../Navbar.jsx';
-import Dog from '../../../../../public/images/dog.svg'
 import TimestampInput from '@/Components/TimestampInput';
 import { useForm } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -8,7 +5,8 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import SearchBar from '@/Components/SearchBar';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import AppLayout from '@/Layouts/AppLayout';
 
 export default function CreatePet({ auth }) {
 
@@ -46,15 +44,12 @@ export default function CreatePet({ auth }) {
   };
 
   return (
-    <>
-      <Navbar auth={auth} />
-
+    <AppLayout auth={auth}>
       <div className=' fundo-div min-h-screen py-20'>
-
         <div className='container mx-auto'>
           <div className='flex flex-col lg:flex-row w-10/12 lg:w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden'>
             <div className='w-full lg:w-1/2 md:flex hidden flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center'>
-              <img src={Dog} className='w-[300px] md:w-[80%] hidden md:block  lg:mr-[20px]' />
+              <img src='/images/dog.svg' className='w-[300px] md:w-[80%] hidden md:block  lg:mr-[20px]' />
 
             </div>
 
@@ -150,6 +145,6 @@ export default function CreatePet({ auth }) {
           </div>
         </div>
       </div>
-    </>
+    </AppLayout>
   );
 }

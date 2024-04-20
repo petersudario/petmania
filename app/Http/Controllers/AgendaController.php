@@ -12,7 +12,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        return Inertia::render('CRUD/Agenda/Index');
+        return Inertia::render('Agenda/Index');
     }
 
     /**

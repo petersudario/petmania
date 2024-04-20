@@ -24,7 +24,7 @@ export default function Navbar({ auth }) {
                                 Home
                             </NavLink>
 
-                            <NavLink href={route('homepage')} active={false}>
+                            <NavLink href={route('about')} active={route().current('about')}>
                                 Sobre
                             </NavLink>
                             <NavLink href={route('agenda.index')} active={route().current('agenda.index')}>
@@ -33,7 +33,7 @@ export default function Navbar({ auth }) {
                             <NavLink href={route('services')} active={route().current('services')}>
                                 Serviços
                             </NavLink>
-                            <NavLink href={route('homepage')} active={false}>
+                            <NavLink href={route('contacts')} active={route().current('contacts')}>
                                 Contato
                             </NavLink>
 
@@ -131,13 +131,13 @@ export default function Navbar({ auth }) {
                         Home
                     </ResponsiveNavLink>
 
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
+                    <ResponsiveNavLink href={route('about')} active={route().current('about')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
                         Sobre
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
+                    <ResponsiveNavLink href={route('agenda.index')} active={route().current('agenda.index')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
                         Agenda
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink href={route('homepage')} active={route().current('')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
+                    <ResponsiveNavLink href={route('contacts')} active={route().current('contacts')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
                         Contato
                     </ResponsiveNavLink>
                     <ResponsiveNavLink href={route('login')} active={route().current('login')}>
@@ -146,6 +146,12 @@ export default function Navbar({ auth }) {
                     <ResponsiveNavLink href={route('register')} active={route().current('register')}>
                         Register
                     </ResponsiveNavLink>
+
+                    {(auth.user && auth.user.role == "admin" ) && (
+                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')} className='text-white bg-paleta-3 hover:bg-blue-900 hover:border-paleta-7 border-blue-700'>
+                            Dashboard
+                        </ResponsiveNavLink>
+                    )}
                 </div>
                 {auth.user && (
                     <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
@@ -157,7 +163,7 @@ export default function Navbar({ auth }) {
                             </div>
 
                             <div className="mt-3 space-y-1">
-                                <ResponsiveNavLink href={route('profile.edit')} active={route().current('profile.edit')}>Profile</ResponsiveNavLink>
+                                <ResponsiveNavLink href={route('profile.edit')} active={route().current('profile.edit')}>Perfil</ResponsiveNavLink>
                                 <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                     Log Out
                                 </ResponsiveNavLink>
