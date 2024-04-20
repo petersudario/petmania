@@ -8,7 +8,7 @@ use Inertia\Inertia;
 class ContactsController extends Controller
 {
     public function index(){
-        return Inertia::render('GET/Contact/Index');
+        return Inertia::render('Contact');
     }
     
 

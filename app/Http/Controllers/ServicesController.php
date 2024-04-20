@@ -12,7 +12,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        return Inertia::render('GET/Services/Index');
+        return Inertia::render('Services');
     }
 
   
