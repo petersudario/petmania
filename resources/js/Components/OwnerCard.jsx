@@ -1,6 +1,6 @@
 const OwnerCard = ({ owner }) => {
   return (
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden h-fit">
           <div className="bg-blue-500 px-4 py-2">
               <h2 className="text-xl font-semibold text-white">{owner.name}</h2>
           </div>

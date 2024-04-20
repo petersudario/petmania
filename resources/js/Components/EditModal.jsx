@@ -45,9 +45,7 @@ export default function EditModal({ show, onClose, petId, owners }) {
   const submit = (e) => {
     e.preventDefault();
     post(route('petaxios.update', petId));
-
     window.location.reload();
-
   };
 
   return (
