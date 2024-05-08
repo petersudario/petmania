@@ -37,6 +37,12 @@ class AppServiceProvider extends ServiceProvider
             return $diff->y >= $minAge;
         });
 
+        Validator::extend('future_date', function ($attribute, $value, $parameters, $validator) {
+            $date = new \DateTime($value);
+            $now = new \DateTime();
+            return $date <= $now;
+        });
+
 
     }
 }
