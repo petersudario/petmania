@@ -16,9 +16,12 @@ return new class extends Migration
             $table->string('name', 80);
             $table->string('role', 20)->default('customer');
             $table->string('cpf', 14);
+            $table->string('phone_number', 15);
+            $table->string('address', 255);
             $table->string('email', 80)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->date('birth_date');
             $table->rememberToken();
             $table->timestamps();
         });
