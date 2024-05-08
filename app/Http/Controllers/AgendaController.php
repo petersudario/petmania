@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
 use App\Models\Pet;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +14,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Agenda/Index', ['pet' => Pet::all()]);
+        return Inertia::render('Agenda/Index', ['pets' => Pet::all(), 'agenda' => Agenda::all()]);
     }
 
     /**

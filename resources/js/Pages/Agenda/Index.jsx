@@ -3,8 +3,11 @@ import AppLayout from '@/Layouts/AppLayout';
 import { usePage } from '@inertiajs/react';
 
 export default function Index({ auth }) {
-    const pets = ['Trufa', 'Luly'];
-    const {pet} = usePage().props;    
+    const {pets} = usePage().props;    
+    const {agenda} = usePage().props; 
+    //console.log(agenda)
+    //console.log(getOccupiedHours(agenda, "2024-04-17"))
+
     
     const services = ['Escolha um serviço:','banho', 'tosa', 'banho e tosa', 'hidratação', 'tosa específica'];
     let hours = [' Selecione_um_horário:'];
@@ -14,6 +17,33 @@ export default function Index({ auth }) {
     const dia11 = ['10:00', '10:30', '13:30', '14:00', '15:30', '16:00'];
     const dia12 = ['09:00', '09:30', '11:30', '15:30', '16:00', '16:30'];
     const h1Ref = useRef(null);
+
+    function getOccupiedHours(agenda, pets, day) {
+        const occupiedHours = [];
+    
+        // Filter objects for the specified day
+        const dayObjects = agenda.filter(obj => obj.start_date.startsWith(day));
+        // Iterate over filtered objects
+        dayObjects.forEach(obj => {
+            const startDate = new Date(obj.start_date);
+            const endDate = new Date(obj.end_date);
+            const petName = obj.fk_pet_id; // Assuming there's a property called "pet_name" in the object
+    
+            // Add occupied hours and associated pet name to the list
+            console.log(pets)
+            while (startDate < endDate) {
+                const hour = startDate.getHours();
+                const minutes = startDate.getMinutes();
+                occupiedHours.push({
+                    time: `${hour < 10 ? '0' + hour : hour}:${minutes === 0 ? '00' : minutes}`,
+                    pet: pets ? pet.pet_name : null 
+                });
+                startDate.setMinutes(startDate.getMinutes() + 30); // Increment by 30 minutes
+            }
+        });
+        console.log(occupiedHours)
+        return occupiedHours;
+    }
 
     function gerarTabelaMes(mes, ano) {
         let dias = obterDiasDoMes(mes, ano);
@@ -117,11 +147,10 @@ export default function Index({ auth }) {
 
         switch (dia) {
             case '10':
-                ocupado = dia10;
-                hours = dia10;
+                ocupado = getOccupiedHours(agenda, pets, "2024-05-10");
                 break;
             case '11':
-                ocupado = dia11;
+                ocupado = getOccupiedHours(agenda, pets, "2024-04-18");
                 break;
             case '12':
                 ocupado = dia12;
@@ -179,7 +208,7 @@ export default function Index({ auth }) {
                         <label>
                             <h1>Pet:</h1>
                             <select className="w-[50vw] sm:w-[30vw] lg:w-[20vw]">
-                                {pet.map((pet, index)  => <option key={index} value={pet.pet_name}>{pet.pet_name}</option>)}
+                                {pets.map((pet, index)  => <option key={index} value={pet.pet_name}>{pet.pet_name}</option>)}
                             </select>
                         </label>
                         <label>
