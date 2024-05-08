@@ -27,21 +27,25 @@ export default function Index({ auth }) {
         dayObjects.forEach(obj => {
             const startDate = new Date(obj.start_date);
             const endDate = new Date(obj.end_date);
-            const petName = obj.fk_pet_id; // Assuming there's a property called "pet_name" in the object
-    
+            const petId = obj.fk_pet_id; // Assuming there's a property called "pet_name" in the object
+            let petName;
             // Add occupied hours and associated pet name to the list
-            console.log(pets)
+            
             while (startDate < endDate) {
                 const hour = startDate.getHours();
                 const minutes = startDate.getMinutes();
+                for(let pet of pets){
+                    if(pet.id == petId){
+                        petName = pet.pet_name
+                    }
+                }
                 occupiedHours.push({
                     time: `${hour < 10 ? '0' + hour : hour}:${minutes === 0 ? '00' : minutes}`,
-                    pet: pets ? pet.pet_name : null 
+                    pet: petName
                 });
                 startDate.setMinutes(startDate.getMinutes() + 30); // Increment by 30 minutes
             }
         });
-        console.log(occupiedHours)
         return occupiedHours;
     }
 
@@ -158,7 +162,16 @@ export default function Index({ auth }) {
             default:
                 ocupado = [];
         }
+        
+        let listaHorarios = [];
+        let listaPets = {};
 
+        for(let item of ocupado){
+            listaHorarios.push(item.time);
+            listaPets[item.time] = item.pet;
+        }
+        disponiveis = horarios.filter(horario => !listaHorarios.includes(horario));
+        setAvailableHours(disponiveis);
 
         let divHorarioContainer = document.getElementById('horario');
 
@@ -167,9 +180,9 @@ export default function Index({ auth }) {
         horarios.forEach((horario) => {
             let divHorario = document.createElement('div');
 
-            if (ocupado.includes(horario)) {
+            if (listaHorarios.includes(horario)) {
                 divHorario.className = 'w-[34%] lg:w-[70%] h-51px border-[1px] border-black flex justify-center items-center bg-paleta-5 text-white lg:text-base text-sm';
-                divHorario.innerText =  horario + '\n Ocupado';
+                divHorario.innerText =  horario + '\n' + listaPets[horario];
             } else {
                 divHorario.className = 'w-[34%] lg:w-[70%] h-51px border-[1px] border-black flex justify-center items-center bg-gray-100 text-black lg:text-base text-sm';
                 divHorario.innerText = horario + '\n Disponível';
