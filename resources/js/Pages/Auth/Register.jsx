@@ -48,7 +48,9 @@ export default function Register({ auth }) {
                 </div>
 
 
-                <div className='w-[100%] md:w-1/2 h-full bg-[#f5f5f5] flex flex-col px-20 pt-5'>
+            </div>
+            <div className='w-full h-full flex items-start'>
+                <div className='w-[100%] md:w-1/2 h-[900px] bg-[#f5f5f5] flex flex-col px-20 pt-5 pb-5'>
                     <h1 className='text-base mb-2.5 text-[#060606] font-semibold'>Petmania | Petshop</h1>
 
                     <div className='w-full flex flex-col max-w-[550px] h-full'>
@@ -124,6 +126,18 @@ export default function Register({ auth }) {
                             </div>
                         </div>
                     </div>
+                </div>
+
+
+                <div className='relative w-1/2 h-[900px] md:flex flex-col absolute bg-black hidden'>
+
+                    <div className='absolute flex flex-col z-50 items-center justify-center h-[100%]'>
+                        <h1 className='font-sans text-3xl text-white font-extrabold my-4 text-black'>Olá amigo!</h1>
+                        <h2 className='font-sans text-2xl text-white font-normal drop-shadow-2xl'>Seja bem vindo ao Petmania!</h2>
+                        <p className='font-sans text-2xl italic text-white font-normal drop-shadow-2xl mt-5 pl-5 pr-5'>Faça seu cadastro e aproveite todos os nossos benefícios </p>
+                    </div>
+
+                    <img src={PetmaniaLogin} alt='imagem-petmania' className='w-[100%] absolute h-[900px] object-cover opacity-70 z-10' />
                 </div>
             </div>
         </AppLayout>
