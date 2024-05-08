@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
+import { usePage } from '@inertiajs/react';
 
 export default function Index({ auth }) {
     const pets = ['Trufa', 'Luly'];
+    const {pet} = usePage().props;    
+    
     const services = ['Escolha um serviço:','banho', 'tosa', 'banho e tosa', 'hidratação', 'tosa específica'];
     let hours = [' Selecione_um_horário:'];
     const [availableHours, setAvailableHours] = useState(hours);
@@ -176,7 +179,7 @@ export default function Index({ auth }) {
                         <label>
                             <h1>Pet:</h1>
                             <select className="w-[50vw] sm:w-[30vw] lg:w-[20vw]">
-                                {pets.map((pet, index) => <option key={index} value={pet}>{pet}</option>)}
+                                {pet.map((pet, index)  => <option key={index} value={pet.pet_name}>{pet.pet_name}</option>)}
                             </select>
                         </label>
                         <label>
