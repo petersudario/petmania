@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Owner;
 use Inertia\Inertia;
 
 class PetOwnerController extends Controller
@@ -14,7 +13,7 @@ class PetOwnerController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Owner/Index', ['owners' => Owner::all()]);
+        return Inertia::render('Owner/Index', ['users' => User::where('role', 'customer')->get()]);
     }
 
     /**
@@ -32,11 +31,11 @@ class PetOwnerController extends Controller
     {
         $request->validate([
             'name' => 'required|string|min:10|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:' . Owner::class . '|unique:' . User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'phone_number' => 'required|string|min:14|max:14',
             'address' => 'required|string|max:255',
             'birth_date' => 'required|date',
-            'cpf' => 'required|cpf|string|unique:' . Owner::class,
+            'cpf' => 'required|cpf|string|unique:' . User::class,
         ], [
             'name.required' => 'O campo nome é obrigatório.',
             'name.max' => 'O nome informado é muito longo.',
@@ -56,7 +55,7 @@ class PetOwnerController extends Controller
             'cpf.unique' => 'O CPF informado já está em uso.',
         ]);
 
-        $owner = Owner::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'cpf' => $request->cpf,

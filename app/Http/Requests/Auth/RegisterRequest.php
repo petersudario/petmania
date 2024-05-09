@@ -25,9 +25,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:10|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:' . Owner::class . '|unique:' . User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => 'required|password|confirmed',
-            'cpf' => 'required|cpf|string|unique:' . Owner::class . '|unique:' . User::class,
+            'cpf' => 'required|cpf|string|unique:' . User::class,
             'phone_number' => 'required|string|min:14|max:14',
             'birth_date' => 'required|date|birth_date',
         ];
