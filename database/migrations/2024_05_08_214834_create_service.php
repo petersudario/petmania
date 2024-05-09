@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('service', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id')->autoIncrement();
             $table->string('service_type', 20);
             $table->string('description', 255)->nullable();
             $table->timestamps();

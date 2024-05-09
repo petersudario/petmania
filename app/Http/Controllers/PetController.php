@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Owner;
+use App\Models\User;
 use App\Models\Pet;
 use Illuminate\Http\Request;
 
@@ -19,7 +19,7 @@ class PetController extends Controller
 
     public function index()
     {
-        return Inertia::render('Pet/Index', ['pets' => Pet::all(), 'owners' => Owner::all()]);
+        return Inertia::render('Pet/Index', ['pets' => Pet::all(), 'users' => User::all()]);
     }
 
     /**
@@ -93,9 +93,8 @@ class PetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    /**
-     * Update the specified resource in storage.
-     */
+
+
     public function update(Request $request, string $id)
     {
         $request->validate(
@@ -114,8 +113,6 @@ class PetController extends Controller
                 'image_url.max' => 'A imagem deve ter no máximo 40MB',
             ]
             );
-
-            
 
         if ($request->image != null) {
             $imageName = time() . "." . $request->image->extension();

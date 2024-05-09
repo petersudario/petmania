@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id')->autoIncrement();
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->unsignedBigInteger('fk_users_id');
