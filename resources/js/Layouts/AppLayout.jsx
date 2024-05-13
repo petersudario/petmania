@@ -6,7 +6,7 @@ export default function AppLayout({ auth, children,  }) {
   return (
     <React.Fragment>
       <Navbar auth={auth} />
-      <main className='h-[140vh]'>
+      <main>
         {children}
       </main>
      <Footer />
