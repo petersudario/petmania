@@ -136,10 +136,10 @@ export default function Index({ auth }) {
             let divHorario = document.createElement('div');
 
             if (ocupado.includes(horario)) {
-                divHorario.className = 'w-[34%] lg:w-[70%] h-50px lg:h-[150px] border-[1px] border-black flex justify-center items-center bg-paleta-5 text-white lg:text-xl text-sm';
+                divHorario.className = 'w-[34%] lg:w-[70%] h-51px border-[1px] border-black flex justify-center items-center bg-paleta-5 text-white lg:text-base text-sm';
                 divHorario.innerText =  horario + '\n Ocupado';
             } else {
-                divHorario.className = 'w-[34%] lg:w-[70%] h-50px lg:h-[150px] border-[1px] border-black flex justify-center items-center bg-gray-100 text-black lg:text-xl text-sm';
+                divHorario.className = 'w-[34%] lg:w-[70%] h-51px border-[1px] border-black flex justify-center items-center bg-gray-100 text-black lg:text-base text-sm';
                 divHorario.innerText = horario + '\n Disponível';
                 let [hora, minuto] = horario.split(':');
                 let data = new Date(ano, mes, dia, hora, minuto);
