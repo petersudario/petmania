@@ -129,6 +129,7 @@ export default function Index({ auth }) {
         //let data = new Date(); // Data atual
         let data = new Date(2024, 4, 9); // data colocada para teste
         let dias = [];
+        data.setDate(data.getDate() -3);
         for (let i = 0; i < 14; i++) {
             dias.push(new Date(data));
             data.setDate(data.getDate() + 1);
