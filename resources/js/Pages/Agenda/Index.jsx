@@ -145,24 +145,20 @@ export default function Index({ auth }) {
         let disponiveis = [];
         let mes = data.getMonth();
         let ano = data.getFullYear();
-        if (diaatual > 14 && dia < 14){
+        /*if (diaatual > 14 && dia < 14){
             mes = mes + 1;
+        }*/
+        mes = mes + 1;
+        if(mes.toString().length == 1){
+            mes = "0"+(mes)
         }
-        console.log(dia);
-
-        switch (dia) {
-            case '10':
-                ocupado = getOccupiedHours(agenda, pets, "2024-05-10");
-                break;
-            case '11':
-                ocupado = getOccupiedHours(agenda, pets, "2024-04-18");
-                break;
-            case '12':
-                ocupado = dia12;
-                break;
-            default:
-                ocupado = [];
+        if(dia.toString().length == 1){
+            dia = "0"+(dia)
         }
+        
+        console.log((`${ano}-${mes}-${dia}`))
+        ocupado = getOccupiedHours(agenda, pets, `${ano}-${mes}-${dia}`);
+                
         
         let listaHorarios = [];
         let listaPets = {};
