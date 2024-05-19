@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agenda;
 use App\Models\Pet;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,7 +15,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Agenda/Index', ['pets' => Pet::all(), 'agenda' => Agenda::all()]);
+        return Inertia::render('Agenda/Index', ['pets' => Pet::all(), 'agenda' => Agenda::all(), 'services' => Service::all()]);
     }
 
     /**
@@ -29,22 +30,21 @@ class AgendaController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   $dataHoraInicial =$request->date;
+    {   
+        $dataHoraInicial = $request->date;
 
         // Soma meia hora (30 minutos)
         $dataHoraModificada = date("Y-m-d H:i:s", strtotime($dataHoraInicial . " +30 minutes"));
-        
 
-        // Exibe a data e hora modificada
-        echo $dataHoraModificada;
         Agenda::create([
             'start_date' => $request->date,
             'end_date' => $dataHoraModificada,
-            'fk_users_id' => 1,
-            'fk_service_id' => 1,
+            'fk_users_id' => $request->customer_id,
+            'fk_service_id' => $request->service,
             'fk_pet_id' => $request->pet_Id,
         ]);
-        return redirect()->route('homepage')->with('success', 'Agenda realizada com sucesso');
+        
+        return redirect()->route('agenda.index')->with('success', 'Agendamento realizado com sucesso!');
     }
 
     /**
@@ -78,4 +78,6 @@ class AgendaController extends Controller
     {
         //
     }
+
+  
 }

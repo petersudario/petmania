@@ -24,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::get('/get_pet_from_customer', [SearchController::class, 'getPetsFromCustomer'])->name('get_pet_from_customer');

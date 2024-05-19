@@ -2,35 +2,68 @@ import React, { useEffect, useRef, useState } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
 import { usePage } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
+import SearchBar from '@/Components/SearchBar';
 
 export default function Index({ auth }) {
-    const {pets} = usePage().props;    
-    const {agenda} = usePage().props; 
+    const { agenda } = usePage().props;
+    const { services } = usePage().props;
+
+    const [selectedId, setSelectedId] = useState(null);
+    const [searchResults, setSearchResults] = useState([]);
+    const { pets } = usePage().props;
+
+    const [currentClientPets, setCurrentClientPets] = useState([]);
 
 
-    
-    
-    const services = ['Escolha um serviço:','banho', 'tosa', 'banho e tosa', 'hidratação', 'tosa específica'];
+
     let hours = [' Selecione_um_horário:'];
     const [availableHours, setAvailableHours] = useState(hours);
     const horarios = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'];
     const h1Ref = useRef(null);
-    
+
     const { data, setData, post, processing, errors, reset } = useForm({
+        customer_id: '',
         pet_Id: 0,
         service: '',
-        date:'',
+        date: '',
     });
+
     const submit = (e) => {
         e.preventDefault();
         console.log(data)
         post(route('agenda.store'));
     };
 
+    const handleSearch = (query) => {
+        fetch(`/api/search?query=${query}`)
+          .then(response => response.json())
+          .then(data => {
+            setSearchResults(data);
+          })
+          .catch(error => {
+            console.error('Error fetching search results:', error);
+          });
+      };
+
+      const handlePets = (id) => {
+        fetch(`/api/get_pet_from_customer?customer_id=${id}`)
+          .then(response => response.json())
+          .then(data => {
+            setCurrentClientPets(data);
+          })
+      }
+
+      const handleChange = (id) => {
+        setSelectedId(id);
+        setData('customer_id', id); 
+        handlePets(id);
+
+      };
+
 
     function getOccupiedHours(agenda, pets, day) {
         const occupiedHours = [];
-    
+
         // Filter objects for the specified day
         const dayObjects = agenda.filter(obj => obj.start_date.startsWith(day));
         // Iterate over filtered objects
@@ -40,12 +73,12 @@ export default function Index({ auth }) {
             const petId = obj.fk_pet_id; // Assuming there's a property called "pet_name" in the object
             let petName;
             // Add occupied hours and associated pet name to the list
-            
+
             while (startDate < endDate) {
                 const hour = startDate.getHours();
                 const minutes = startDate.getMinutes();
-                for(let pet of pets){
-                    if(pet.id == petId){
+                for (let pet of pets) {
+                    if (pet.id == petId) {
                         petName = pet.pet_name
                     }
                 }
@@ -113,7 +146,7 @@ export default function Index({ auth }) {
                 let linhaSemana = document.createElement('div');
                 if (indice < 7) {
                     linhaSemana.className = 'linha-semana flex justify-center';
-                }else {
+                } else {
                     linhaSemana.className = 'linha-semana flex justify-center';
                 }
                 semana.forEach((divDia) => {
@@ -139,7 +172,7 @@ export default function Index({ auth }) {
         //let data = new Date(); // Data atual
         let data = new Date(2024, 4, 9); // data colocada para teste
         let dias = [];
-        data.setDate(data.getDate() -3);
+        data.setDate(data.getDate() - 3);
         for (let i = 0; i < 14; i++) {
             dias.push(new Date(data));
             data.setDate(data.getDate() + 1);
@@ -159,19 +192,19 @@ export default function Index({ auth }) {
             mes = mes + 1;
         }*/
         mes = mes + 1;
-        if(mes.toString().length == 1){
-            mes = "0"+(mes)
+        if (mes.toString().length == 1) {
+            mes = "0" + (mes)
         }
-        if(dia.toString().length == 1){
-            dia = "0"+(dia)
+        if (dia.toString().length == 1) {
+            dia = "0" + (dia)
         }
         ocupado = getOccupiedHours(agenda, pets, `${ano}-${mes}-${dia}`);
-                
-        
+
+
         let listaHorarios = [];
         let listaPets = {};
 
-        for(let item of ocupado){
+        for (let item of ocupado) {
             listaHorarios.push(item.time);
             listaPets[item.time] = item.pet;
         }
@@ -186,12 +219,12 @@ export default function Index({ auth }) {
 
             if (listaHorarios.includes(horario)) {
                 divHorario.className = 'w-[34%] lg:w-[70%] h-51px border-[1px] border-black flex justify-center items-center bg-paleta-5 text-white lg:text-base text-sm';
-                divHorario.innerText =  horario + '\n' + listaPets[horario];
+                divHorario.innerText = horario + '\n' + listaPets[horario];
             } else {
                 divHorario.className = 'w-[34%] lg:w-[70%] h-51px border-[1px] border-black flex justify-center items-center bg-gray-100 text-black lg:text-base text-sm';
                 divHorario.innerText = horario + '\n Disponível';
                 let [hora, minuto] = horario.split(':');
-                let data = new Date(ano, mes-1, dia, hora, minuto);
+                let data = new Date(ano, mes - 1, dia, hora, minuto);
                 let dataFormatada = data.toLocaleString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).replace(/\//g, '-').replace(/, /g, ' ');
                 let [dataParte, horaParte] = dataFormatada.split(' ');
                 dataParte = dataParte.split('-').reverse().join('-');
@@ -222,17 +255,26 @@ export default function Index({ auth }) {
                 </div>
                 <div className="w-[80%] lg:w-[30%] h-[300px] lg:h-[70vh] bg-white rounded-3xl flex justify-center items-center">
                     <form className="flex flex-col items-center justify-evenly w-[100%]" onSubmit={submit}>
+
+                        <label>
+                            <h1>Cliente:</h1>
+                            <SearchBar onSearch={handleSearch} searchResults={searchResults} onChange={handleChange} />
+                            <input type="hidden" id='customer_id' name='customer_id' value={selectedId} onChange={() => { }} />
+
+                        </label>
+
                         <label>
                             <h1>Pet:</h1>
                             <select className="w-[50vw] sm:w-[30vw] lg:w-[20vw]" value={data.pet_Id} onChange={e => setData("pet_Id", e.target.value)}>
-                                <option>Selecione o seu Pet</option>
-                                {pets.map((pet, index)  => <option key={index} value={pet.id}>{pet.pet_name}</option>)}
+                                <option selected>Selecione o pet do Cliente</option>
+                                {currentClientPets.map((pet, index) => <option key={index} value={pet.id}>{pet.pet_name}</option>)}
                             </select>
                         </label>
                         <label>
                             <h1>Serviço: </h1>
-                            <select className="w-[50vw] sm:w-[30vw] lg:w-[20vw]" value={data.service} onChange={e => setData("service", e.target.value)}>
-                                {services.map((service, index) => <option key={index} value={service}>{service}</option>)}
+                            <select className="w-[50vw] sm:w-[30vw] lg:w-[20vw]" value={data.service.id} onChange={e => setData("service", e.target.value)}>
+                                <option selected>Selecione o serviço</option>
+                                {services.map((service, index) => <option key={index} value={service.id}>{service.service_type}</option>)}
                             </select>
                         </label>
                         <label>
@@ -244,7 +286,7 @@ export default function Index({ auth }) {
                                 })}
                             </select>
                         </label>
-                        <input type="submit" value="Agendar" className="w-[100px] bg-paleta-8 text-white border-[2px] border-black"/>
+                        <input type="submit" value="Agendar" className="w-[100px] bg-paleta-8 text-white border-[2px] border-black" />
                     </form>
                 </div>
             </div>
