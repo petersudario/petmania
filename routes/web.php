@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\ContactsController;
@@ -38,9 +39,7 @@ Route::get("/", [HomepageController::class, 'index'])->name('homepage');
 
 
 Route::middleware('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('petowner', PetOwnerController::class);
     Route::resource("pet", PetController::class);

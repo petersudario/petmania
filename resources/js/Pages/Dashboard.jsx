@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link, Head } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
+import { usePage } from '@inertiajs/react';
+
+
 
 const Dashboard = ({ auth, laravelVersion, phpVersion }) => {
+    const { pets } = usePage().props;
+    console.log(pets)
+    const { users } = usePage().props;
     return (
         <AppLayout auth={auth}>
             <Head>
@@ -19,9 +25,6 @@ const Dashboard = ({ auth, laravelVersion, phpVersion }) => {
                         <div className="flex flex-col md:flex-row md:justify-between mt-4">
                             <Link href={route('petowner.index')} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center mb-2 md:mb-0">
                                 Ver Clientes
-                            </Link>
-                            <Link href={route('petowner.create')} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
-                                Adicionar Clientes
                             </Link>
                         </div>
                     </div>
@@ -53,71 +56,66 @@ const Dashboard = ({ auth, laravelVersion, phpVersion }) => {
                     </div>
 
                     <section className="mb-10">
-                        <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-white">Pets Registrados</h2>
+                        <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-white">Pets recém-registrados</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Nome do Pet 1</h3>
-                                <p className="text-black">Data de Registro: 01/04/2024</p>
-                                <p className="text-black">Informações: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            
+                        {pets.length === 0 ? (
+                            <div className="font-bold flex flex-col justify-between items-center w-full h-fit py-4 border-b border-gray-300">
+                                <p className="text-lg md:text-xl">Nenhum pet registrado recentemente</p>
+                                <a href={route('pet.create')} className="bg-green-500 text-white px-4 py-2 rounded-lg md:text-lg">Adicionar Pet</a>
                             </div>
-                            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Nome do Pet 1</h3>
-                                <p className="text-black">Data de Registro: 02/04/2024</p>
-                                <p className="text-black">Informações: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Nome do Pet 1</h3>
-                                <p className="text-black">Data de Registro: 03/04/2024</p>
-                                <p className="text-black">Informações: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
+                        ): (pets.map((pet, index) => (
+
+                                <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
+                                    
+                                    <h3 className="text-xl font-semibold mb-2 text-black">{pet.pet_name}</h3>
+                                    <p className="text-xl font-semibold mb-2 text-black">Dono: {pet.user_name}</p>
+                                    <p className="text-black">Data de Registro: {pet.created_at}</p>
+                                    <p className="text-black">Raça/Espécie: {pet.specie}</p>
+                                    <p className="text-black">Telefone: {pet.user_phone_number}</p>
+                                    <p className="text-black">Email: {pet.user_email}</p>
+                                    <p className="text-black">Endereço: {pet.user_address}</p>
+                                    <p className="text-black">CPF: {pet.user_cpf}</p>
+                                </div>
+                            )))
+
+                        }
                         </div>
                     </section>
 
                     <section className="mb-10">
-                        <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-white">Donos de Pets Registrados</h2>
+                        <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-white">Clientes Recentes</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Nome do Pet 1</h3>
-                                <p className="text-black">Data de Registro: 01/04/2024</p>
-                                <p className="text-black">Informações: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    
+                        {users.length === 0 ? (
+                            <div className="font-bold flex flex-col justify-between items-center w-full h-fit py-4 border-b border-gray-300">
+                                <p className="text-lg md:text-xl">Nenhum cliente registrado recentemente</p>
                             </div>
-                            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Nome do Pet 1</h3>
-                                <p className="text-black">Data de Registro: 02/04/2024</p>
-                                <p className="text-black">Informações: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Nome do Pet 1</h3>
-                                <p className="text-black">Data de Registro: 03/04/2024</p>
-                                <p className="text-black">Informações: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
+                        ): (users.map((user, index) => (
+
+                                <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
+                                    <h3 className="text-xl font-semibold mb-2 text-black">{user.name}</h3>
+                                    <p className="text-black">Data de Registro: {user.created_at}</p>
+                                    <p className="text-black">Telefone: {user.phone_number}</p>
+                                    <p className="text-black">Email: {user.email}</p>
+                                    <p className="text-black">Endereço: {user.address}</p>
+                                    <p className="text-black">CPF: {user.cpf}</p>
+                                    <p className="text-black">Data de Nascimento: {user.birth_date}</p>
+
+
+                                </div>
+                            )))
+
+                        }
                         </div>
                     </section>
 
                     <section className="mb-10">
-                        <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-white">Agendas Registradas</h2>
+                        <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-white">Agendamentos</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Nome do Pet 1</h3>
-                                <p className="text-black">Data de Registro: 01/04/2024</p>
-                                <p className="text-black">Informações: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Nome do Pet 1</h3>
-                                <p className="text-black">Data de Registro: 02/04/2024</p>
-                                <p className="text-black">Informações: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div className="bg-white rounded-lg shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold mb-2 text-black">Nome do Pet 1</h3>
-                                <p className="text-black">Data de Registro: 03/04/2024</p>
-                                <p className="text-black">Informações: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
+                            
                         </div>
                     </section>
-                    <div className="mt-10">
-                        <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-white">Informações Extras</h2>
-                        <p className="text-gray-600">Algumas informações adicionais sobre o seu dashboard podem ser adicionadas aqui.</p>
-                    </div>
                 </div>
             </div>
         </AppLayout>
