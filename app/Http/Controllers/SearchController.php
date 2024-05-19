@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Pet;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,6 +20,13 @@ class SearchController extends Controller
         })
         ->where('role', 'customer')
         ->get();
+        return response()->json($results);
+    }
+
+    public function getPetsFromCustomer(Request $request)
+    {
+        $customerId = $request->input('customer_id');
+        $results = Pet::where('fk_pet_owner_id', $customerId)->get();
         return response()->json($results);
     }
 }
