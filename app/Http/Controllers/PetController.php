@@ -79,7 +79,7 @@ class PetController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('CRUD/Pet/Show', ['pet' => Pet::find($id)]);
+        return Inertia::render('Pet/Show', ['pet' => Pet::find($id)]);
     }
 
     /**
@@ -87,7 +87,7 @@ class PetController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('CRUD/Pet/Edit', ['pet' => Pet::find($id), 'owners' => Owner::all()]);
+        return Inertia::render('Pet/Edit', ['pet' => Pet::find($id), 'owners' => Owner::all()]);
     }
 
     /**

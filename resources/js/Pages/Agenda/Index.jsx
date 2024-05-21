@@ -16,6 +16,10 @@ export default function Index({ auth }) {
 
 
 
+    const {pets} = usePage().props;    
+    const {agenda} = usePage().props; 
+    const {service} = usePage().props;
+    
     let hours = [' Selecione_um_horário:'];
     const [availableHours, setAvailableHours] = useState(hours);
     const horarios = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'];
@@ -272,9 +276,8 @@ export default function Index({ auth }) {
                         </label>
                         <label>
                             <h1>Serviço: </h1>
-                            <select className="w-[50vw] sm:w-[30vw] lg:w-[20vw]" value={data.service.id} onChange={e => setData("service", e.target.value)}>
-                                <option selected>Selecione o serviço</option>
-                                {services.map((service, index) => <option key={index} value={service.id}>{service.service_type}</option>)}
+                            <select className="w-[50vw] sm:w-[30vw] lg:w-[20vw]" value={data.service} onChange={e => setData("service", e.target.value)}>
+                                {services.map((service, index) => <option key={index} value={service}>{service}</option>)}
                             </select>
                         </label>
                         <label>

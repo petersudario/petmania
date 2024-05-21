@@ -15,7 +15,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Agenda/Index', ['pets' => Pet::all(), 'agenda' => Agenda::all(), 'services' => Service::all()]);
+        return Inertia::render('Agenda/Index', ['pets' => Pet::all(), 'agenda' => Agenda::all(), 'service' => Service::all()]);
     }
 
     /**
