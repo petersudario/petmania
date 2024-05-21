@@ -5,20 +5,15 @@ import { useForm } from '@inertiajs/react';
 import SearchBar from '@/Components/SearchBar';
 
 export default function Index({ auth }) {
-    const { agenda } = usePage().props;
-    const { services } = usePage().props;
-
-    const [selectedId, setSelectedId] = useState(null);
-    const [searchResults, setSearchResults] = useState([]);
-    const { pets } = usePage().props;
-
-    const [currentClientPets, setCurrentClientPets] = useState([]);
-
-
-
     const {pets} = usePage().props;    
     const {agenda} = usePage().props; 
     const {service} = usePage().props;
+
+    const [selectedId, setSelectedId] = useState(null);
+    const [searchResults, setSearchResults] = useState([]);
+   
+
+    const [currentClientPets, setCurrentClientPets] = useState([]);
     
     let hours = [' Selecione_um_horário:'];
     const [availableHours, setAvailableHours] = useState(hours);
@@ -277,7 +272,7 @@ export default function Index({ auth }) {
                         <label>
                             <h1>Serviço: </h1>
                             <select className="w-[50vw] sm:w-[30vw] lg:w-[20vw]" value={data.service} onChange={e => setData("service", e.target.value)}>
-                                {services.map((service, index) => <option key={index} value={service}>{service}</option>)}
+                                {service.map((serv, index) => <option key={index} value={serv.id}>{serv.service_type}</option>)}
                             </select>
                         </label>
                         <label>
