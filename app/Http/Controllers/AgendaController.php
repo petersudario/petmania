@@ -30,7 +30,7 @@ class AgendaController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
+    {
         $dataHoraInicial = $request->date;
 
         // Soma meia hora (30 minutos)
@@ -43,7 +43,7 @@ class AgendaController extends Controller
             'fk_service_id' => $request->service,
             'fk_pet_id' => $request->pet_Id,
         ]);
-        
+
         return redirect()->route('agenda.index')->with('success', 'Agendamento realizado com sucesso!');
     }
 
@@ -52,7 +52,7 @@ class AgendaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Inertia::render('Agenda/Show', ['agenda' => Agenda::find($id)]);
     }
 
     /**
@@ -79,5 +79,5 @@ class AgendaController extends Controller
         //
     }
 
-  
+
 }
