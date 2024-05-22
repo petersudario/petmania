@@ -9,7 +9,7 @@ class Agenda extends Model
 {
     use HasFactory;
     protected $table = 'tasks';
-    protected $primaryKey = 'id';
+
     protected $fillable = [
         'start_date',
         'end_date',

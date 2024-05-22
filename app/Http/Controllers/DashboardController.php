@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
+use App\Models\Agenda;
 use App\Models\Pet;
 use Carbon\Carbon;
 
@@ -58,6 +59,39 @@ class DashboardController extends Controller
             ];
         });
 
-        return Inertia::render("Dashboard", ['pets' => $pets, 'users' => $users]);
+        $agenda = Agenda::where('tasks.created_at', '>=', now()->subDays(5))
+            ->join('users', 'tasks.fk_users_id', '=', 'users.id')
+            ->join('service', 'tasks.fk_service_id', '=', 'service.id')
+            ->join('pet', 'tasks.fk_pet_id', '=', 'pet.id')
+            ->select('tasks.*', 'users.*', 'service.*', 'pet.*')
+            ->get();
+
+        $agenda = $agenda->map(function ($task) {
+
+            return [
+                'id' => $task->id,
+                'start_date' => Carbon::parse($task->start_date)->format('d/m/Y H:i'),
+                'end_date' => Carbon::parse($task->end_date)->format('d/m/Y H:i'),
+                'status' => $task->status,
+                'user_name' => $task->name,
+                'user_email' => $task->email,
+                'user_phone_number' => $task->phone_number,
+                'user_address' => $task->address,
+                'user_cpf' => $task->cpf,
+                'pet_name' => $task->pet_name,
+                'specie' => $task->specie,
+                'vacinado' => $task->vacinado,
+                'image_url' => $task->image_url,
+                'remarks' => $task->remarks,
+                'fk_pet_owner_id' => $task->fk_pet_owner_id,
+                'birth_date' => $task->birth_date,
+                'service_type' => $task->service_type,
+                'description' => $task->description,
+                'created_at' => Carbon::parse($task->created_at)->format('d/m/Y H:i'),
+                'updated_at' => $task->updated_at,
+            ];
+        });
+
+        return Inertia::render("Dashboard", ['pets' => $pets, 'users' => $users, 'agenda' => $agenda]);
     }
 }
