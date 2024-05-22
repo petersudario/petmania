@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Agenda;
 use App\Models\Pet;
 use App\Models\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 class AgendaController extends Controller
 {
@@ -96,6 +98,40 @@ class AgendaController extends Controller
     {
         //
     }
+
+    public function list()
+    {
+        $agenda = DB::table('tasks')
+        ->join('users', 'tasks.fk_users_id', '=', 'users.id')
+        ->join('service', 'tasks.fk_service_id', '=', 'service.id')
+        ->join('pet', 'tasks.fk_pet_id', '=', 'pet.id')
+        ->select(
+            'tasks.id as task_id', 
+            'tasks.start_date', 
+            'tasks.end_date', 
+            'tasks.status', 
+            'users.name as user_name', 
+            'users.email', 
+            'users.phone_number', 
+            'users.address', 
+            'users.cpf', 
+            'pet.pet_name', 
+            'pet.specie', 
+            'pet.vacinado', 
+            'pet.image_url', 
+            'pet.remark', 
+            'pet.fk_pet_owner_id', 
+            'pet.birth_date', 
+            'service.service_type', 
+            'service.description as service_description', 
+            'tasks.created_at', 
+            'tasks.updated_at'
+        )
+        ->get();
+
+        return Inertia::render('Agenda/List', ['agenda' => $agenda]);
+    }
+    
 
 
 }

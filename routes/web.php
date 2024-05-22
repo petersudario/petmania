@@ -42,6 +42,7 @@ Route::middleware('admin')->group(function () {
     Route::resource('petowner', PetOwnerController::class);
     Route::resource("pet", PetController::class);
     Route::resource("agenda", AgendaController::class);
+    Route::get('/dashboard/agenda/list', [AgendaController::class, 'list'])->name('agenda.list');
 });
 
 
