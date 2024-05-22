@@ -14,7 +14,6 @@ class DashboardController extends Controller
     public function index()
     {
 
-
         $users = User::where('created_at', '>=', now()->subDays(5))
             ->where('role', 'customer')
             ->get();

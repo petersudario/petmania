@@ -8,6 +8,7 @@ use App\Http\Controllers\PetOwnerController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\WarnController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -50,8 +51,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::get('/mypets', [PetController::class, 'myPets'])->name('mypets');
+    Route::get('/warn', [WarnController::class, 'index'])->name('warn');
+    Route::post('/warn/post', [WarnController::class, 'sendWarn'])->name('warn.send');
 });
 
 require __DIR__ . '/auth.php';
