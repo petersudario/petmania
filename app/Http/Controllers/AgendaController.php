@@ -53,10 +53,17 @@ class AgendaController extends Controller
      */
     public function show(string $id)
     {
-        $pet = Pet::find($id);
-        return Inertia::render('Agenda/Show', ['task' => Agenda::find($id)->join('pet', 'pet.id', '=', 'tasks.fk_pet_id')->join('service', 'service.id', '=', 'tasks.fk_service_id')->join('users', 'users.id', '=', 'tasks.fk_users_id')->select('tasks.*', 'pet.*', 'service.*', 'users.name', 'users.cpf')->get()]);
-    }
+        $task = Agenda::join('pet', 'pet.id', '=', 'tasks.fk_pet_id')
+            ->join('service', 'service.id', '=', 'tasks.fk_service_id')
+            ->join('users', 'users.id', '=', 'tasks.fk_users_id')
+            ->where('tasks.id', $id)
+            ->select('tasks.id', 'tasks.start_date', 'tasks.end_date', 'tasks.fk_users_id', 'tasks.fk_service_id', 'tasks.status', 'pet.pet_name', 'pet.specie', 'pet.vacinado', 'pet.image_url', 'pet.remark', 'pet.fk_pet_owner_id', 'pet.birth_date', 'service.service_type', 'service.description', 'users.name', 'users.cpf')
+            ->first();
 
+        return Inertia::render('Agenda/Show', [
+            'task' => $task
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      */
@@ -70,7 +77,7 @@ class AgendaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+
     }
 
     public function startTask(string $id)
