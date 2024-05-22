@@ -66,6 +66,7 @@ class PetController extends Controller
             'specie' => $request->specie,
             'remark' => $request->remarks,
             'birth_date' => $request->birth_date,
+            'vacinado' => $request->vacinado,
             'image_url' => $imageName ?? null,
             'fk_pet_owner_id' => $request->owner_id,
         ]);
