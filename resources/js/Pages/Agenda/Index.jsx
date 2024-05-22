@@ -169,8 +169,7 @@ export default function Index({ auth }) {
     }
 
     function obterDiasDoMes() {
-        //let data = new Date(); // Data atual
-        let data = new Date(2024, 4, 9); // data colocada para teste
+        let data = new Date(); // Data atual
         let dias = [];
         data.setDate(data.getDate() - 3);
         for (let i = 0; i < 14; i++) {
