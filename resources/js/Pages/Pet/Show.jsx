@@ -4,7 +4,7 @@ import { useState } from 'react';
 import EditModal from '@/Components/EditModal.jsx';
 import AppLayout from '@/Layouts/AppLayout.jsx';
 
-export default function Index({ auth }) {
+export default function Show({ auth }) {
 
     const { pets } = usePage().props;
     const { users } = usePage().props;
@@ -39,7 +39,7 @@ export default function Index({ auth }) {
                 <div className="h-fit flex flex-col items-center">
                     <div className="h-fit flex flex-col items-center">
                         {pets.length === 0 ? (
-                            <div className="font-bold flex flex-col items-center w-full h-[70vh] py-4 border-b border-gray-300">
+                            <div className="font-bold flex flex-col justify-between items-center w-full h-fit py-4 border-b border-gray-300">
                                 <p className="text-lg md:text-xl">Nenhum pet registrado</p>
                                 <a href={route('pet.create')} className="bg-green-500 text-white px-4 py-2 rounded-lg md:text-lg">Adicionar Pet</a>
                             </div>
@@ -53,7 +53,6 @@ export default function Index({ auth }) {
                                         <div className="flex flex-col mt-[30px] md:md-[0]">
                                             <p className='text-lg md:text-xl'>Nome: {pet.pet_name}</p>
                                             <p className='text-lg md:text-xl'>Raça: {pet.specie}</p>
-                                            <p className='text-lg md:text-xl'>Vacinado: {pet.vacinado === 1 ? 'Sim' : 'Não'}</p>
                                             <p className='text-lg md:text-xl'>Dono: {users.find(user => user.id === pet.fk_pet_owner_id).name} </p>
                                             <div className='flex h-fit justify-evenly w-fit'>
                                                 <div className='w-[2px] h-[90px] bg-black mx-[4px]' />
@@ -78,6 +77,7 @@ export default function Index({ auth }) {
                     </div>
                 </div>
             </div>
+
         </AppLayout>
     );
 }
