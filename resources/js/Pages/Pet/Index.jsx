@@ -53,6 +53,7 @@ export default function Index({ auth }) {
                                         <div className="flex flex-col mt-[30px] md:md-[0]">
                                             <p className='text-lg md:text-xl'>Nome: {pet.pet_name}</p>
                                             <p className='text-lg md:text-xl'>Raça: {pet.specie}</p>
+                                            <p className='text-lg md:text-xl'>Vacinado: {pet.vacinado === 1 ? 'Sim' : 'Não'}</p>
                                             <p className='text-lg md:text-xl'>Dono: {users.find(user => user.id === pet.fk_pet_owner_id).name} </p>
                                             <div className='flex h-fit justify-evenly w-fit'>
                                                 <div className='w-[2px] h-[90px] bg-black mx-[4px]' />
@@ -77,7 +78,6 @@ export default function Index({ auth }) {
                     </div>
                 </div>
             </div>
-
         </AppLayout>
     );
 }
