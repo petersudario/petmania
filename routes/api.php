@@ -3,9 +3,7 @@
 use App\Http\Controllers\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PetOwnerApi;
-use App\Http\Controllers\PetAPI;
-use App\Models\Pet;
+use App\Http\Controllers\AgendaAPI;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/get_pet_from_customer', [SearchController::class, 'getPetsFromCustomer'])->name('get_pet_from_customer');
+// Route::put('/startTask/{id}', [AgendaAPI::class, 'startTask'])->name('startTask');
+// Route::put('/stopTask/{id}', [AgendaAPI::class, 'stopTask'])->name('stopTask');
+// Route::put('/finishTask/{id}', [AgendaAPI::class, 'finishTask'])->name('finishTask');
+
+Route::put('/updateTaskStatus/{id}', [AgendaAPI::class, 'updateTaskStatus']);

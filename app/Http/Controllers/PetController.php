@@ -88,7 +88,6 @@ class PetController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('CRUD/Pet/Edit', ['pet' => Pet::find($id), 'owners' => Owner::all()]);
     }
 
     /**
@@ -113,7 +112,7 @@ class PetController extends Controller
                 'image_url.mimes' => 'A imagem deve ser do tipo jpeg, png ou jpg',
                 'image_url.max' => 'A imagem deve ter no máximo 40MB',
             ]
-            );
+        );
 
         if ($request->image != null) {
             $imageName = time() . "." . $request->image->extension();
@@ -128,7 +127,7 @@ class PetController extends Controller
             'image_url' => $imageName ?? null,
             'fk_pet_owner_id' => $request->fk_pet_owner_id,
         ]);
-        
+
         return redirect()->route('pet.index')->with('success', 'Pet atualizado com sucesso');
 
     }
@@ -140,6 +139,13 @@ class PetController extends Controller
     {
         Pet::destroy($id);
     }
+
+    public function myPets()
+    {
+        $customer_id = auth()->user()->id;
+        return Inertia::render('Pet/MyPets', ['pets' => Pet::join('tasks', 'fk_pet_id', '=', 'pet.id')->where('fk_pet_owner_id', $customer_id)->get()]);
+    }
+
 
 
 

@@ -36,15 +36,16 @@ class AgendaController extends Controller
         // Soma meia hora (30 minutos)
         $dataHoraModificada = date("Y-m-d H:i:s", strtotime($dataHoraInicial . " +30 minutes"));
 
-        Agenda::create([
+        $task = Agenda::create([
             'start_date' => $request->date,
+            'status' => 'Agendado',
             'end_date' => $dataHoraModificada,
             'fk_users_id' => $request->customer_id,
             'fk_service_id' => $request->service,
             'fk_pet_id' => $request->pet_Id,
         ]);
 
-        return redirect()->route('agenda.index')->with('success', 'Agendamento realizado com sucesso!');
+        return redirect()->route('agenda.show', $task->id);
     }
 
     /**
@@ -52,7 +53,8 @@ class AgendaController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('Agenda/Show', ['agenda' => Agenda::find($id)]);
+        $pet = Pet::find($id);
+        return Inertia::render('Agenda/Show', ['task' => Agenda::find($id)->join('pet', 'pet.id', '=', 'tasks.fk_pet_id')->join('service', 'service.id', '=', 'tasks.fk_service_id')->join('users', 'users.id', '=', 'tasks.fk_users_id')->select('tasks.*', 'pet.*', 'service.*', 'users.name', 'users.cpf')->get()]);
     }
 
     /**
@@ -68,7 +70,16 @@ class AgendaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+    }
+
+    public function startTask(string $id)
+    {
+        $task = Agenda::find($id);
+        $task->status = 'Em andamento';
+        $task->save();
+
+        return redirect()->route('agenda.show', $task->id);
     }
 
     /**
