@@ -7,9 +7,9 @@ function TextCard({ title, content, image }) {
       <img src={image} alt="" className='max-w-100 h-100 w-100'/>
       <h2 className="text-lg font-bold mb-2 mt-2">{title}</h2>
       <p className="text-gray-700 p-2">{content}</p>
-      <PrimaryButton className="text-white">
-                                Agendar serviço
-                            </PrimaryButton>
+      <PrimaryButton onClick={() => window.location.href = '/warn'} className="text-white">
+        Agendar serviço
+      </PrimaryButton>
     </div>
   );
 }
