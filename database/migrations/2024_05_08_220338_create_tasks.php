@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('fk_users_id');
             $table->unsignedBigInteger('fk_service_id');
             $table->unsignedBigInteger('fk_pet_id');
+            $table->string('status', 255);
             $table->timestamps();
-
             $table->foreign('fk_users_id')->references('id')->on('users');
             $table->foreign('fk_service_id')->references('id')->on('service');
             $table->foreign('fk_pet_id')->references('id')->on('pet');

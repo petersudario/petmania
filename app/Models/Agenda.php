@@ -13,6 +13,7 @@ class Agenda extends Model
     protected $fillable = [
         'start_date',
         'end_date',
+        'status',
         'fk_users_id',
         'fk_pet_owner_id',
         'fk_service_id',

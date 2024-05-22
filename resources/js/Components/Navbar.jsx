@@ -27,9 +27,13 @@ export default function Navbar({ auth }) {
                             <NavLink href={route('about')} active={route().current('about')}>
                                 Sobre
                             </NavLink>
-                            <NavLink href={route('agenda.index')} active={route().current('agenda.index')}>
-                                Agenda
-                            </NavLink>
+                            
+                            {(auth.user && auth.user.role == "admin" ) && (
+                                <NavLink href={route('agenda.index')} active={route().current('agenda.index')}>
+                                    Agenda
+                                </NavLink>
+                            )}
+
                             <NavLink href={route('services')} active={route().current('services')}>
                                 Serviços
                             </NavLink>
@@ -88,9 +92,11 @@ export default function Navbar({ auth }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Ver Perfil</Dropdown.Link>
+                                        <Dropdown.Link href={route('profile.edit')}>Perfil</Dropdown.Link>
+                                        <Dropdown.Link href={route('mypets')}>Meus pets</Dropdown.Link>
+
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
+                                            Sair
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -164,8 +170,10 @@ export default function Navbar({ auth }) {
 
                             <div className="mt-3 space-y-1">
                                 <ResponsiveNavLink href={route('profile.edit')} active={route().current('profile.edit')}>Perfil</ResponsiveNavLink>
+                                <ResponsiveNavLink href={route('profile.edit')} active={route().current('profile.edit')}>Meus pets</ResponsiveNavLink>
+
                                 <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                    Log Out
+                                    Sair
                                 </ResponsiveNavLink>
                             </div>
                         </div>

@@ -24,7 +24,6 @@ use App\Http\Controllers\PetAPI;
 |
 */
 
-Route::resource("agenda", AgendaController::class);
 
 Route::get("/services", [ServicesController::class, 'index'])->name('services');
 Route::get("/contacts", [ContactsController::class, 'index'])->name('contacts');
@@ -40,9 +39,9 @@ Route::get("/", [HomepageController::class, 'index'])->name('homepage');
 
 Route::middleware('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
     Route::resource('petowner', PetOwnerController::class);
     Route::resource("pet", PetController::class);
+    Route::resource("agenda", AgendaController::class);
 });
 
 
@@ -50,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/mypets', [PetController::class, 'myPets'])->name('mypets');
 });
 
 require __DIR__ . '/auth.php';
