@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
 import axios from 'axios';
 import { usePage } from '@inertiajs/react';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 export default function List({ auth }) {
 
@@ -48,7 +49,7 @@ export default function List({ auth }) {
                                             <p className="text-gray-700">Sobre o pet: {tasks.remark}</p>
                                         </div>
                                     </div>
-
+                                <PrimaryButton onClick={() => window.location.href = '/agenda/' + tasks.task_id} className="text-white">Ver</PrimaryButton>
                                 </div>
                             ))
                         )}

@@ -27,7 +27,9 @@ export default function Show({ auth }) {
                 <div className="bg-white rounded-lg shadow-md p-6">
                     <div className="flex justify-between items-center mb-4">
                         <h2 className="text-xl font-semibold">{task.pet_name}</h2>
-                        {task.vacinado && <span className="bg-green-500 text-white px-2 py-1 rounded">Vacinado(a)</span>}
+                        {task.vacinado == 1 && (<span className="bg-green-500 text-white px-2 py-1 rounded">Vacinado(a)</span>) 
+                        || (<span className="bg-red-500 text-white px-2 py-1 rounded">Não vacinado(a)</span>)
+                        }
                     </div>
                     <p><span className="font-semibold">Serviço:</span> {task.service_type}</p>
                     <p><span className="font-semibold">Status:</span> {task.status}</p>

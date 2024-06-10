@@ -31,8 +31,9 @@ export default function MyPets({ auth }) {
                                 <div className="p-4">
                                     <h2 className="text-xl font-semibold mb-2">{pet.pet_name}</h2>
                                     <p className="text-gray-600 mb-2">Status do serviço: {pet.status}</p>
-                                    <p className="text-gray-600 mb-2">Raça: {pet.specie}</p>
-
+                                    <p className="text-gray-600 mb-2">Espécie: {pet.specie}</p>
+                                    <p className="text-gray-600 mb-2">Serviço: {pet.service_type}</p>
+                                    
                                     <p className="text-gray-600 mb-2">Data de nascimento: {pet.birth_date}</p>
                                     <p className={`mb-2 ${pet.vacinado == 1 ? 'text-green-600' : 'text-red-600'}`}>
                                         Vacinado: {pet.vacinado == 1 ? 'Sim' : 'Não'}

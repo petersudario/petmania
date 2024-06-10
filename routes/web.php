@@ -9,10 +9,8 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\WarnController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\PetAPI;
 
 /*
 |--------------------------------------------------------------------------

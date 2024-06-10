@@ -143,8 +143,12 @@ class PetController extends Controller
     public function myPets()
     {
         $customer_id = auth()->user()->id;
-        return Inertia::render('Pet/MyPets', ['pets' => Pet::join('tasks', 'fk_pet_id', '=', 'pet.id')->where('fk_pet_owner_id', $customer_id)->get()]);
+        return Inertia::render('Pet/MyPets', ['pets' => Pet::join('tasks', 'fk_pet_id', '=', 'pet.id')
+            ->join('service', 'tasks.fk_service_id', '=', 'service.id')
+            ->where('fk_pet_owner_id', $customer_id)
+            ->get()]);
     }
+    
 
 
 

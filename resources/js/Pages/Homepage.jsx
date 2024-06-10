@@ -12,7 +12,7 @@ const Homepage = ({ auth }) => {
           <div className="flex flex-col items-center justify-center p-12 text-center relative z-10">
             <img src={Logo} alt="Company Logo" className="mx-auto mb-8" style={{ maxWidth: '200px' }} />
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8">Petmania</h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-white mb-8">Seu pet merece o melhor serviço 100% personaliziado, rápido e prático. Venha nos conhecer agendando o seu horário !</p>
+            <p className="text-lg md:text-xl lg:text-2xl text-white mb-8">Seu pet merece o melhor serviço 100% personalizado, rápido e prático. Venha nos conhecer agendando o seu horário !</p>
             <a href="#features" className="text-xl md:text-2xl text-white border border-white py-3 px-6 rounded-full hover:bg-white hover:text-black transition duration-300">Learn More</a>
           </div>
         </div>
