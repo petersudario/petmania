@@ -96,7 +96,8 @@ class AgendaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $task = Agenda::find($id);
+        $task->delete();
     }
 
     public function list()

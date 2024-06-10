@@ -3,7 +3,7 @@ import AppLayout from '@/Layouts/AppLayout';
 import axios from 'axios';
 import { usePage } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
-
+import { BiSad } from 'react-icons/bi';
 export default function List({ auth }) {
 
     const { agenda } = usePage().props;

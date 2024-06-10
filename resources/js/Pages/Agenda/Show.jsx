@@ -21,6 +21,18 @@ export default function Show({ auth }) {
         }
     };
 
+    const handleRemove = async (id) => {
+        try {
+          await axios.post(route('agenda.destroy', id), {
+            _method: 'delete',
+          });
+          window.location.href=route('pet.index');
+
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
     return (
         <AppLayout auth={auth}>
             <main className="flex flex-col justify-center items-center h-[100vh]">
@@ -48,14 +60,14 @@ export default function Show({ auth }) {
                         </div>
                     </div>
                     <div className='grid'>
-                        {task.status !== 'Agendado' && (
-                            <button onClick={() => handleUpdateTask(task.id, 'Pausado')} className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4">Pausar serviço</button>
+                        {task.status !== 'Agendado' && task.status !== 'Pronto' && (
+                            <button onClick={() => handleUpdateTask(task.id, 'Pronto')} className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4">Marcar como Pronto</button>
                         )}
-                        {task.status !== 'Em andamento' && (
+                        {task.status !== 'Em andamento' && task.status !== 'Pronto' &&(
                             <button onClick={() => handleUpdateTask(task.id, 'Em andamento')} className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4">Iniciar serviço</button>
                         )}
                         {task.status !== 'Agendado' && (
-                            <button onClick={() => handleUpdateTask(task.id, 'Finalizado')} className="bg-red-500 text-white px-4 py-2 rounded-lg mt-4">Encerrar serviço</button>
+                            <button onClick={() => handleRemove(task.id)} className="bg-red-500 text-white px-4 py-2 rounded-lg mt-4">Encerrar serviço</button>
                         )}
                     </div>
                 </div>

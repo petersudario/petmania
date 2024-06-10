@@ -29,10 +29,6 @@ const OwnerCard = ({ owner }) => {
                   <label className="block text-gray-700 font-semibold mb-2">Endereço</label>
                   <p className="text-gray-800">{owner.address}</p>
               </div>
-              
-              <div className="flex justify-end">
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:bg-blue-600">Edit</button>
-              </div>
           </div>
       </div>
   );
