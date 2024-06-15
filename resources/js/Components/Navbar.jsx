@@ -9,7 +9,7 @@ export default function Navbar({ auth }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        
+
         <nav className="bg-paleta-3 z-50 inset-0">
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +27,7 @@ export default function Navbar({ auth }) {
                             <NavLink href={route('about')} active={route().current('about')}>
                                 Sobre
                             </NavLink>
-                            
+
                             {(auth.user && auth.user.role == "admin" ) && (
                                 <NavLink href={route('agenda.index')} active={route().current('agenda.index')}>
                                     Agenda
@@ -181,6 +181,6 @@ export default function Navbar({ auth }) {
                 )}
             </div>
         </nav>
-        
+
     );
 }

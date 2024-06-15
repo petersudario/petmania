@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const SearchBar = ({ onSearch, searchResults, onChange, ownerPersistedId = null, owners }) => {
+const SearchBar = ({ onSearch, searchResults, onChange, ownerPersistedId = null, owners}) => {
   const [query, setQuery] = useState('');
   const [selectedResult, setSelectedResult] = useState(null);
   const [selected, setSelected] = useState(false);

@@ -4,10 +4,10 @@ import { BiSad } from "react-icons/bi";
 
 export default function MyPets({ auth }) {
     const { pets } = usePage().props;
-    
+
     return (
         <AppLayout auth={auth}>
-            <div className="flex flex-col h-screen items-center items-center">
+            <div className="flex flex-col h-screen items-center">
                 <div className="w-full">
                     <h1 className="mt-20 px-[40px] mb-20 font-extrabold md:text-[30px] sm:text-[25px] text-[20px]">
                         Pets sob cuidados
@@ -24,7 +24,7 @@ export default function MyPets({ auth }) {
 
                         </div>
                     ) : (
-                        pets.map((pet, index) => (
+                        pets.map((pet) => (
                             <div>
                             <div className="bg-white m-[8px] rounded-lg shadow-md overflow-hidden min-w-[287px] min-h-[400px] max-w-[287px] max-h-[400px]">
                                 <img src={"/images/" + pet.image_url} alt={pet.image_url} className="w-full h-56 object-cover object-center" />
@@ -41,7 +41,7 @@ export default function MyPets({ auth }) {
                                     <p className="text-gray-700">Sobre o pet: {pet.remark}</p>
                                 </div>
                             </div>
-                            
+
                             </div>
                         ))
                     )}

@@ -14,8 +14,6 @@ export default function Index({ auth }) {
 
     const [currentClientPets, setCurrentClientPets] = useState([]);
 
-
-
     let hours = [' Selecione_um_horário:'];
     const [availableHours, setAvailableHours] = useState(hours);
     const horarios = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'];
@@ -32,6 +30,7 @@ export default function Index({ auth }) {
         e.preventDefault();
         console.log(data)
         post(route('agenda.store'));
+        window.location.reload();
     };
 
     const handleSearch = (query) => {
@@ -55,7 +54,7 @@ export default function Index({ auth }) {
 
       const handleChange = (id) => {
         setSelectedId(id);
-        setData('customer_id', id); 
+        setData('customer_id', id);
         handlePets(id);
 
       };
@@ -245,17 +244,17 @@ export default function Index({ auth }) {
 
     return (
         <AppLayout auth={auth}>
-            <div className="w-full h-[1000px] lg:h-screen bg-gray-200 flex flex-col lg:flex-row justify-around items-center">
+            <div className="w-full h-[1200px] lg:h-screen bg-gray-200 flex flex-col lg:flex-row justify-around items-center">
                 <div className="w-[80%] lg:w-[30%] h-[300px] lh:h-[70vh] bg-white rounded-3xl flex justify-center items-center">
                     <div className="w-[70%]" ref={h1Ref}></div>
                 </div>
                 <div className="w-[80%] lg:w-[30%] h-[300px] lg:h-[80vh] py-[40px] bg-white rounded-3xl flex flex-col flex-wrap lg:flex-row justify-center items-center px-5" id="horario">
                     <h1>Selecione um dia para ver os horários</h1>
                 </div>
-                <div className="w-[80%] lg:w-[30%] h-[300px] lg:h-[70vh] bg-white rounded-3xl flex justify-center items-center">
+                <div className="w-[80%] lg:w-[30%] h-[400px] lg:h-[70vh] bg-white rounded-3xl flex justify-center items-center">
                     <form className="flex flex-col items-center justify-evenly w-[100%]" onSubmit={submit}>
 
-                        <label>
+                        <label className="w-[50vw] sm:w-[30vw] lg:w-[20vw]">
                             <h1>Cliente:</h1>
                             <SearchBar onSearch={handleSearch} searchResults={searchResults} onChange={handleChange} />
                             <input type="hidden" id='customer_id' name='customer_id' value={selectedId} onChange={() => { }} />
